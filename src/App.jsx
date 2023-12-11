@@ -1,12 +1,22 @@
 import "./App.css";
-import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Layout from "./components/layout/layout";
+import ForumPage from "./pages/forum-page";
 
 function App() {
-  return (
-    <>
-      <h1 className="text-red-500 text-4xl font-semibold">Hello World</h1>
-    </>
-  );
+  const router = createBrowserRouter([
+    {
+      element: <Layout />,
+      children: [
+        {
+          path: "/",
+          element: <ForumPage />,
+        },
+      ],
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;
