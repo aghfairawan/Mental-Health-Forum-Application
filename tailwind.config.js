@@ -4,6 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
+        "light-navy": "#006CBE",
+        "custom-gray": "#3C4245",
+        "dark-navy": "#0C2B64",
         "main-dark": "#16161a",
         "sub-dark": "#242629",
       },
@@ -17,6 +20,9 @@ export default {
         248: "62rem",
       },
       backgroundColor: {
+        "dark-navy": "#0C2B64",
+        "light-navy": "#006CBE",
+        "light-theme": "#F1F8FE",
         "main-dark": "#16161a",
         "sub-dark": "#242629",
       },
