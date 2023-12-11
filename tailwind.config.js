@@ -2,7 +2,30 @@
 export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "main-dark": "#16161a",
+        "sub-dark": "#242629",
+      },
+      width: {
+        86: "21.5rem",
+        92: "23rem",
+        128: "32rem",
+        150: "37.5rem",
+        200: "50rem",
+        232: "58rem",
+        248: "62rem",
+      },
+      backgroundColor: {
+        "main-dark": "#16161a",
+        "sub-dark": "#242629",
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+    },
   },
+  darkMode: "class",
   plugins: [],
 };
