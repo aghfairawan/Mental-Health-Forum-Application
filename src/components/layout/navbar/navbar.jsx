@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { navVariants } from "../../../utils/animate-variants";
 import DropdownNavItems from "./signin-items";
+import SearchNavbar from "./search-bar";
 
 function NavLinks() {
   return (
@@ -40,8 +41,11 @@ export default function Navbar() {
             <h1>Good Health & </h1>
             <span>Well-Being Forum</span>
           </div>
-          <div className="hidden md:flex gap-5 ">
+          <div className="hidden md:flex gap-5 grow">
             <NavLinks />
+          </div>
+          <div className="hidden md:flex">
+            <SearchNavbar />
           </div>
           <div className="hidden md:flex gap-4">
             <ThemeBtn />
@@ -55,7 +59,8 @@ export default function Navbar() {
       </nav>
       <AnimatePresence>
         {isOpen && (
-          <motion.div variants={navVariants} initial="closed" animate="open" exit="closed" className="flex flex-col items-center py-2 gap-2 bg-light-navy text-white rounded-b-md ">
+          <motion.div variants={navVariants} initial="closed" animate="open" exit="closed" className="flex flex-col items-center pt-2 pb-4 gap-2 bg-light-navy text-white rounded-b-md ">
+            <SearchNavbar />
             <NavLinks />
           </motion.div>
         )}
