@@ -39,6 +39,6 @@ export default {
   darkMode: "class",
   plugins: [require("flowbite/plugin"), require("tailwind-scrollbar")],
   variants: {
-    scrollbar: ["dark"],
+    scrollbar: ["rounded"],
   },
 };
