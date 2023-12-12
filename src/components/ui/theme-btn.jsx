@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { HiMoon, HiSun } from "react-icons/hi";
+import { MoonStar, Sun } from "lucide-react";
 
 export default function ThemeBtn() {
   const [theme, setTheme] = useState("light");
@@ -41,8 +41,8 @@ export default function ThemeBtn() {
   }, [theme]);
 
   return (
-    <button className="shadow-lg rounded-xl my-1 px-2 bg-slate-300 dark:bg-sub-dark hover:opacity-50" type="button" onClick={toggleTheme} title="theme-btn">
-      {theme === "dark" ? <HiMoon color="white" /> : <HiSun />}
+    <button className="hover:opacity-70" type="button" onClick={toggleTheme} title="theme-btn">
+      {theme === "dark" ? <MoonStar /> : <Sun />}
     </button>
   );
 }
