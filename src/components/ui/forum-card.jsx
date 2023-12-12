@@ -21,15 +21,15 @@ export default function ForumCard({ title, children, id, icon }) {
   };
 
   return (
-    <motion.div className="border border-gray-200 rounded-lg shadow mb-2 p">
-      <div className="bg-dark-navy rounded-lg">
+    <motion.div className="border border-gray-200 rounded-tl-lg shadow mb-2 p">
+      <div className="bg-dark-navy rounded-tl-lg">
         <motion.h2 layout="position" onClick={handleToggle} className="text-white text-xl p-2">
           {title}
           {icon}
         </motion.h2>
       </div>
       <AnimatePresence>
-        <motion.div>
+        <motion.div >
           {isOpen && (
             <motion.div variants={forumCardVariants} transition={{ duration: 0.75 }} initial="closed" animate="open" exit="closed" className="bg-white">
               {children}
