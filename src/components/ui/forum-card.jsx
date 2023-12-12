@@ -30,11 +30,9 @@ export default function ForumCard({ title, children, id, icon }) {
       </div>
       <AnimatePresence>
         <motion.div>
-          {isOpen && (
-            <motion.div variants={forumCardVariants} transition={{ duration: 0.8 }} initial="closed" animate="open" exit="closed" className="bg-white">
-              {children}
-            </motion.div>
-          )}
+          <motion.div variants={forumCardVariants} transition={{ duration: 0.75 }} initial="closed" animate={isOpen ? "open" : "closed"} exit="closed" className="bg-white">
+            {children}
+          </motion.div>
         </motion.div>
       </AnimatePresence>
     </motion.div>
