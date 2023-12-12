@@ -4,7 +4,7 @@ import { Outlet, useLocation } from "react-router-dom";
 
 export default function Layout() {
   const location = useLocation();
-  const isAuthRoute = location.pathname === "/register" && location.pathname === "/login";
+  const isAuthRoute = location.pathname === "/register" || location.pathname === "/login";
   return (
     <div className="h-fit bg-light-theme text-custom-gray dark:bg-gradient-to-b from-main-dark to-sub-dark dark:text-white ">
       <Navbar />
