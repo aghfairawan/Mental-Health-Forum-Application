@@ -10,7 +10,7 @@ export default function Layout() {
       <Navbar />
       <div className="flex flex-col max-w-screen-xl  mt-5 mx-auto px-2 lg:px-0">
         {!isAuthRoute && (
-          <div className="md:sticky md:top-16 md:z-20">
+          <div className="md:sticky md:top-16 md:z-10">
             <BreadcrumbNav />
           </div>
         )}
