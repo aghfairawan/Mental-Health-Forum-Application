@@ -1,11 +1,16 @@
 import { useState } from "react";
+import { Lock, Mail, User, Eye, EyeOff } from 'lucide-react';
 
 const RegistrationForm = () => {
     const [formData, setFormData] = useState({
+        username: "",
         email: "",
         password: "",
         confirmPassword: "",
     });
+
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const handleChange = (e) => {
         setFormData({
@@ -16,7 +21,7 @@ const RegistrationForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Add your form submission logic here
+
         console.log("Form submitted:", formData);
     };
 
@@ -29,64 +34,91 @@ const RegistrationForm = () => {
                     </h1>
                     <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                         <div>
-                            <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                            <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Username
                             </label>
-                            <input
-                                type="email"
-                                name="email"
-                                id="email"
-                                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="name@company.com"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                            />
+                            <div className="relative">
+                                <User className="absolute left-3 top-2.5 text-gray-400 dark:text-gray-300" />
+
+                                <input
+                                    type="username"
+                                    name="username"
+                                    id="username"
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 pl-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="username"
+                                    value={formData.username}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
                         </div>
                         <div>
                             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Email
                             </label>
-                            <input
-                                type="email"
-                                name="email"
-                                id="email"
-                                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="name@company.com"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                            />
+                            <div className="relative">
+                                <Mail className="absolute left-3 top-2.5 text-gray-400 dark:text-gray-300" />
+                                <input
+                                    type="email"
+                                    name="email"
+                                    id="email"
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 pl-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="name@company.com"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
                         </div>
                         <div>
                             <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Password
                             </label>
-                            <input
-                                type="password"
-                                name="password"
-                                id="password"
-                                placeholder="••••••••"
-                                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                value={formData.password}
-                                onChange={handleChange}
-                                required
-                            />
+                            <div className="relative">
+                                <Lock className="absolute left-3 top-2.5 text-gray-400 dark:text-gray-300" />
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    name="password"
+                                    id="password"
+                                    placeholder="••••••••"
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 pl-10 pr-12 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    value={formData.password}
+                                    onChange={handleChange}
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    className="absolute right-3 top-2.5 text-gray-400 dark:text-gray-300"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    {showPassword ? <EyeOff /> : <Eye />}
+                                </button>
+                            </div>
                         </div>
                         <div>
                             <label htmlFor="confirmPassword" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                 Confirm password
                             </label>
-                            <input
-                                type="password"
-                                name="confirmPassword"
-                                id="confirmPassword"
-                                placeholder="••••••••"
-                                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                value={formData.confirmPassword}
-                                onChange={handleChange}
-                                required
-                            />
+                            <div className="relative">
+                                <Lock className="absolute left-3 top-2.5 text-gray-400 dark:text-gray-300" />
+                                <input
+                                    type={showConfirmPassword ? "text" : "password"}
+                                    name="confirmPassword"
+                                    id="confirmPassword"
+                                    placeholder="••••••••"
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 pl-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    value={formData.confirmPassword}
+                                    onChange={handleChange}
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    className="absolute right-3 top-2.5 text-gray-400 dark:text-gray-300"
+                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                >
+                                    {showConfirmPassword ? <EyeOff /> : <Eye />}
+                                </button>
+                            </div>
                         </div>
                         <div className="flex items-start">
                             <div className="flex items-center h-5">
@@ -106,7 +138,7 @@ const RegistrationForm = () => {
                         </div>
                         <button
                             type="submit"
-                            className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                            className="w-full text-white bg-gradient-to-r from-purple-700 to-blue-500 hover:from-purple-500 hover:via-dark-blue-500 hover:to-blue-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gradient-to-r dark:from-blue-500 dark:via-blue-600 dark:to-blue-700 dark:hover:from-blue-600 dark:hover:via-blue-700 dark:hover:to-blue-800 dark:focus:ring-primary-800"
                         >
                             Create an account
                         </button>
@@ -118,6 +150,8 @@ const RegistrationForm = () => {
             </div>
 
         </section>
+
+
     );
 };
 
