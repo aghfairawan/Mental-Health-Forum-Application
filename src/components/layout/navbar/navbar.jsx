@@ -1,20 +1,11 @@
 import { useState } from "react";
 import ThemeBtn from "../../ui/theme-btn";
-import { NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { navVariants } from "../../../utils/animate-variants";
-
-function NavLinks() {
-  return (
-    <>
-      <NavLink className="hover:opacity-80" to="">Home</NavLink>
-      <NavLink to="">Articles</NavLink>
-      <NavLink to="">Contact</NavLink>
-      <NavLink to="">Feedback</NavLink>
-    </>
-  );
-}
+import DropdownNavItems from "./signin-items";
+import SearchNavbar from "./search-bar";
+import NavLinks from "./navlink-items";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,26 +22,26 @@ export default function Navbar() {
             <h1>Good Health & </h1>
             <span>Well-Being Forum</span>
           </div>
-          <div className="hidden md:flex gap-5">
+          <div className="hidden md:flex gap-5 grow">
             <NavLinks />
           </div>
-          <div className="flex gap-4">
-            <ThemeBtn />
-            <p>signup</p>
+          <div className="hidden md:flex">
+            <SearchNavbar />
           </div>
-          <motion.div className="md:hidden" >
+          <div className="hidden md:flex gap-4">
+            <ThemeBtn />
+            <DropdownNavItems />
+          </div>
+          <motion.div className="flex md:hidden gap-4 pr-2">
+            <DropdownNavItems />
             <button onClick={toggleNavItems}>{isOpen ? <X /> : <Menu />}</button>
           </motion.div>
         </div>
       </nav>
-      <AnimatePresence >
+      <AnimatePresence>
         {isOpen && (
-          <motion.div
-            variants={navVariants}
-            initial="closed"
-            animate="open"
-            exit="closed"
-            className="flex flex-col items-center py-2 gap-2 bg-light-navy text-white">
+          <motion.div variants={navVariants} initial="closed" animate="open" exit="closed" className="flex flex-col items-center pt-2 pb-4 gap-2 bg-light-navy text-white rounded-b-md ">
+            <SearchNavbar />
             <NavLinks />
           </motion.div>
         )}

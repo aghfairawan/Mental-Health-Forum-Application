@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}"],
@@ -9,6 +10,9 @@ export default {
         "dark-navy": "#0C2B64",
         "main-dark": "#16161a",
         "sub-dark": "#242629",
+      },
+      height: {
+        "19/20": "95%",
       },
       width: {
         86: "21.5rem",
@@ -33,6 +37,8 @@ export default {
     },
   },
   darkMode: "class",
-  // eslint-disable-next-line no-undef
-  plugins: [require("flowbite/plugin")],
+  plugins: [require("flowbite/plugin"), require("tailwind-scrollbar")],
+  variants: {
+    scrollbar: ["rounded"],
+  },
 };
