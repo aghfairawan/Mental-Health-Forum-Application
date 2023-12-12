@@ -33,5 +33,6 @@ export default {
     },
   },
   darkMode: "class",
-  plugins: [],
+  // eslint-disable-next-line no-undef
+  plugins: [require("flowbite/plugin")],
 };
