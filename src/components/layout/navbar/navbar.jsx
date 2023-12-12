@@ -1,30 +1,11 @@
 import { useState } from "react";
 import ThemeBtn from "../../ui/theme-btn";
-import { NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { navVariants } from "../../../utils/animate-variants";
 import DropdownNavItems from "./signin-items";
 import SearchNavbar from "./search-bar";
-
-function NavLinks() {
-  return (
-    <>
-      <NavLink className="hover:opacity-80" to="">
-        Home
-      </NavLink>
-      <NavLink className="hover:opacity-80" to="">
-        Articles
-      </NavLink>
-      <NavLink className="hover:opacity-80" to="">
-        Contact
-      </NavLink>
-      <NavLink className="hover:opacity-80" to="">
-        Feedback
-      </NavLink>
-    </>
-  );
-}
+import NavLinks from "./navlink-items";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
