@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { LOCAL_STORAGE_PREFIX } from "../../utils/ls-prefixes";
+import { forumCardVariants } from "../../utils/animate-variants";
 
-export default function ForumCard({ title, children, cardClassName, titleClassName, id, icon }) {
+export default function ForumCard({ title, children, id, icon }) {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -20,16 +21,22 @@ export default function ForumCard({ title, children, cardClassName, titleClassNa
   };
 
   return (
-    <motion.div layout transition={{ layout: { duration: 1, type: "spring" } }} className={cardClassName}>
-      <motion.h2 layout="position" onClick={handleToggle} className={titleClassName}>
-        {title}
-        {icon}
-      </motion.h2>
-      {isOpen && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
-          {children}
+    <motion.div className="border border-gray-200 rounded-lg shadow mb-2 p">
+      <div className="bg-dark-navy rounded-lg">
+        <motion.h2 layout="position" onClick={handleToggle} className="text-white text-xl p-2">
+          {title}
+          {icon}
+        </motion.h2>
+      </div>
+      <AnimatePresence>
+        <motion.div>
+          {isOpen && (
+            <motion.div variants={forumCardVariants} transition={{ duration: 0.8 }} initial="closed" animate="open" exit="closed" className="bg-white">
+              {children}
+            </motion.div>
+          )}
         </motion.div>
-      )}
+      </AnimatePresence>
     </motion.div>
   );
 }
