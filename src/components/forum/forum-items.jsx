@@ -4,7 +4,7 @@ import ForumCard from "../ui/forum-card";
 import { motion } from "framer-motion";
 import { formatDateForLatestForum } from "../../utils/date-converter";
 import LoadingForumContent from "../ui/loading";
-import { Avatar } from "flowbite-react";
+// import { Avatar } from "flowbite-react";
 import { convertToInitial } from "../../utils/initial-converter";
 
 export default function ForumItems({ forums, loading, posts }) {
@@ -25,7 +25,7 @@ export default function ForumItems({ forums, loading, posts }) {
     <div>
       {Object.entries(groupedForums).map(([category, forumsInCategory], index) => (
         <ForumCard title={category} id={category} key={index} icon={<Folder />}>
-          <motion.ul
+          <motion.div
             variants={{
               open: { opacity: 1, y: 0 },
               closed: { opacity: 0, y: -5 },
@@ -38,47 +38,50 @@ export default function ForumItems({ forums, loading, posts }) {
               const forumPosts = posts[forum._id] || [];
               const latestPost = forumPosts.reduce((latest, current) => (new Date(latest.createdAt) > new Date(current.createdAt) ? latest : current), forumPosts[0]);
               return (
-                <motion.li key={forum._id}>
-                  <div className="flex p-4 transition duration-300 ease-in-out hover:bg-slate-100 w-full">
-                    {loading ? (
-                      <div>
-                        <LoadingForumContent />
-                      </div>
-                    ) : (
-                      <div className="flex gap-2 font-semibold justify-between">
+                <motion.div key={forum._id} className="grid md:grid-cols-3 p-4 gap-0 md:gap-2 font-semibold transition duration-300 ease-in-out hover:bg-slate-100 ">
+                  {loading ? (
+                    <div>
+                      <LoadingForumContent />
+                    </div>
+                  ) : (
+                    <>
+                      <div className="flex gap-2 h-10 pt-2">
                         <MessagesSquare />
-                        <div className="flex gap-1 md:gap-4 flex-col md:flex-row ">
-                          <div className="">
-                            <p className="hover:font-bold hover:opacity-90 capitalize" title={forum.description}>
-                              {forum.title}
-                            </p>
-                          </div>
-                          <div className="flex gap-1 text-center">
-                            <p className="font-normal">Posts: </p>
-                            <p className="font-light">{postCount}</p>
-                          </div>
-                          <div>
-                            {latestPost ? (
-                              <div className="flex flex-col md:flex-row md:gap-1">
-                                <Avatar rounded placeholderInitials={convertToInitial(latestPost.author.username)} title={latestPost.author.username} />
-                                <span className="truncate ..." title={latestPost.title}>
-                                  {latestPost.title},
-                                </span>
-                                <span>{latestPost.author.username},</span>
-                                <span>{formatDateForLatestForum(latestPost.createdAt)}</span>
-                              </div>
-                            ) : (
-                              <p className="text-red-500">No Post</p>
-                            )}
-                          </div>
-                        </div>
+                        <p className="hover:font-bold hover:opacity-90 capitalize " title={forum.description}>
+                          {forum.title}
+                        </p>
                       </div>
-                    )}
-                  </div>
-                </motion.li>
+                      <div className="flex gap-1 md:justify-center h-10 pt-2 underline md:no-underline underline-offset-4">
+                        <p className="font-semibold">
+                          Posts: <span className="font-normal">{postCount}</span>
+                        </p>
+                      </div>
+                      <div className="h-10">
+                        {latestPost ? (
+                          <div className="flex flex-row md:flex-row gap-2 md:gap-1 ">
+                            <div className="">
+                              <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-300 rounded-full" title={latestPost.author.username}>
+                                {convertToInitial(latestPost.author.username)}
+                              </div>
+                              {/* <Avatar rounded placeholderInitials={convertToInitial(latestPost.author.username)} title={latestPost.author.username} className="bg-black" /> */}
+                            </div>
+                            <div className="flex flex-col">
+                              <p className=" line-clamp-1 hover:font-bold hover:opacity-90" title={latestPost.title}>
+                                {latestPost.title}
+                              </p>
+                              <span className="font-light text-sm">{formatDateForLatestForum(latestPost.createdAt)}</span>
+                            </div>
+                          </div>
+                        ) : (
+                          <p className="text-red-500 md:text-end mt-1">No Post</p>
+                        )}
+                      </div>
+                    </>
+                  )}
+                </motion.div>
               );
             })}
-          </motion.ul>
+          </motion.div>
         </ForumCard>
       ))}
     </div>
