@@ -4,6 +4,8 @@ import ForumCard from "../ui/forum-card";
 import { motion } from "framer-motion";
 import { formatDateForLatestForum } from "../../utils/date-converter";
 import LoadingForumContent from "../ui/loading";
+import { Avatar } from "flowbite-react";
+import { convertToInitial } from "../../utils/initial-converter";
 
 export default function ForumItems({ forums, loading, posts }) {
   const forumGroupingByCategory = (forums) => {
@@ -47,7 +49,7 @@ export default function ForumItems({ forums, loading, posts }) {
                         <MessagesSquare />
                         <div className="flex gap-1 md:gap-4 flex-col md:flex-row">
                           <div className="">
-                            <p className="hover:font-bold hover:opacity-90" title={forum.description}>
+                            <p className="hover:font-bold hover:opacity-90 capitalize" title={forum.description}>
                               {forum.title}
                             </p>
                           </div>
@@ -58,6 +60,7 @@ export default function ForumItems({ forums, loading, posts }) {
                           <div>
                             {latestPost ? (
                               <div className="flex flex-col md:flex-row md:gap-1">
+                                <Avatar rounded placeholderInitials={convertToInitial(latestPost.author.username)} title={latestPost.author.username} />
                                 <span>{latestPost.title},</span>
                                 <span>{latestPost.author.username},</span>
                                 <span>{formatDateForLatestForum(latestPost.createdAt)}</span>
