@@ -4,6 +4,7 @@ import Layout from "./components/layout/layout";
 import ForumPage from "./pages/forums-page";
 import RegistrationForm from "./components/Register/register";
 import LoginForm from "./components/Login/login";
+import UserProfileForm from "./components/userProfile/userProfile";
 
 function App() {
   const router = createBrowserRouter([
@@ -21,6 +22,10 @@ function App() {
         {
           path: "/login",
           element: <LoginForm />,
+        },
+        {
+          path: "/userProfile",
+          element: <UserProfileForm />,
         },
       ],
     },

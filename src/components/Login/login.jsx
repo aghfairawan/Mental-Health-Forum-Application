@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { Lock, User, Eye, EyeOff } from 'lucide-react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
     const [formData, setFormData] = useState({
-        email: "",
-        username:"",
+        identifier: "", 
         password: "",
     });
+
+    const navigate = useNavigate();
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -17,11 +20,28 @@ const LoginForm = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
-        console.log("Form submitted:", formData);
-
+    
+        try {
+            const response = await axios.post('http://localhost:8080/api/login', formData);
+    
+            
+            const accessToken = response.data.accessToken;
+    
+            
+            localStorage.setItem('accessToken', accessToken);
+    
+            console.log('Authentication successful');
+        } catch (error) {
+            if (error.response.status === 429) {
+                
+                await new Promise(resolve => setTimeout(resolve, 1000)); 
+                return handleSubmit(e); 
+            }
+    
+            console.error('Authentication failed:', error.message);
+        }
     };
 
     return (
@@ -38,8 +58,8 @@ const LoginForm = () => {
                                 <div className="relative">
                                     <User className="absolute left-3 top-2.5 text-gray-400 dark:text-gray-300" />
                                     <input
-                                        type="text" 
-                                        name="email"
+                                        type="text"
+                                        name="identifier"
                                         id="email"
                                         className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 pl-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="name@company.com or username"
@@ -93,12 +113,18 @@ const LoginForm = () => {
                             </div>
                             <button
                                 type="submit"
-                                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                className="w-full text-white bg-gradient-to-r from-purple-700 to-blue-500 hover:from-purple-500 hover:via-dark-blue-500 hover:to-blue-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gradient-to-r dark:from-blue-500 dark:via-blue-600 dark:to-blue-700 dark:hover:from-blue-600 dark:hover:via-blue-700 dark:hover:to-blue-800 dark:focus:ring-primary-800"
                             >
                                 Sign in
                             </button>
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                Don’t have an account yet? <a href="#" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
+                                Don’t have an account yet?{' '}
+                                <span
+                                    className="font-medium text-primary-600 hover:underline cursor-pointer dark:text-primary-500"
+                                    onClick={() => navigate('/register')} 
+                                >
+                                    Sign up
+                                </span>
                             </p>
                         </form>
                     </div>
