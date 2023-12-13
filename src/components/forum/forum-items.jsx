@@ -22,7 +22,7 @@ export default function ForumItems({ forums, loading, posts }) {
   const groupedForums = forumGroupingByCategory(forums);
 
   return (
-    <div>
+    <motion.div layout>
       {Object.entries(groupedForums).map(([category, forumsInCategory], index) => (
         <ForumCard title={category} id={category} key={index} icon={<Folder />}>
           <ul className="text-custom-gray divide-y divide-gray-200 dark:divide-gray-300 ">
@@ -37,7 +37,7 @@ export default function ForumItems({ forums, loading, posts }) {
                     open: { opacity: 1, y: 0 },
                     closed: { opacity: 0, y: -20 },
                   }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   <div className="flex p-4 transition duration-300 ease-in-out hover:bg-slate-100 w-full">
                     {loading ? (
@@ -47,7 +47,7 @@ export default function ForumItems({ forums, loading, posts }) {
                     ) : (
                       <div className="flex gap-2 font-semibold justify-between">
                         <MessagesSquare />
-                        <div className="flex gap-1 md:gap-4 flex-col md:flex-row">
+                        <div className="flex gap-1 md:gap-4 flex-col md:flex-row ">
                           <div className="">
                             <p className="hover:font-bold hover:opacity-90 capitalize" title={forum.description}>
                               {forum.title}
@@ -61,7 +61,7 @@ export default function ForumItems({ forums, loading, posts }) {
                             {latestPost ? (
                               <div className="flex flex-col md:flex-row md:gap-1">
                                 <Avatar rounded placeholderInitials={convertToInitial(latestPost.author.username)} title={latestPost.author.username} />
-                                <span>{latestPost.title},</span>
+                                <span className="truncate ..." title={latestPost.title}>{latestPost.title},</span>
                                 <span>{latestPost.author.username},</span>
                                 <span>{formatDateForLatestForum(latestPost.createdAt)}</span>
                               </div>
@@ -79,6 +79,6 @@ export default function ForumItems({ forums, loading, posts }) {
           </ul>
         </ForumCard>
       ))}
-    </div>
+    </motion.div>
   );
 }
