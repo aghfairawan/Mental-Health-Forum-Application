@@ -21,7 +21,7 @@ export default function ForumCard({ title, children, id, icon }) {
   };
 
   return (
-    <motion.div className="border border-gray-200 rounded-tl-lg shadow mb-2 p">
+    <motion.div className="border border-gray-200 rounded-tl-lg shadow mb-2 p dark:border-none">
       <div className="bg-dark-navy rounded-tl-lg">
         <motion.h2 layout="position" onClick={handleToggle} className="text-white text-xl p-2">
           {title}
@@ -29,14 +29,22 @@ export default function ForumCard({ title, children, id, icon }) {
         </motion.h2>
       </div>
       <AnimatePresence>
-        <motion.div >
-          {isOpen && (
-            <motion.div variants={forumCardVariants} transition={{ duration: 0.75 }} initial="closed" animate="open" exit="closed" className="bg-white">
-              {children}
-            </motion.div>
-          )}
+        <motion.div>
+          <motion.div variants={forumCardVariants} transition={{ duration: 0.75 }} initial="closed" animate={isOpen ? "open" : "closed"} exit="closed" className="bg-white">
+            {children}
+          </motion.div>
         </motion.div>
       </AnimatePresence>
     </motion.div>
   );
+}
+
+{
+  /* <AnimatePresence>
+<motion.div>
+  <motion.div variants={forumCardVariants} transition={{ duration: 0.75 }} initial="closed" animate={isOpen ? "open" : "closed"} exit="closed" className="bg-white">
+    {children}
+  </motion.div>
+</motion.div>
+</AnimatePresence> */
 }
