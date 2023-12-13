@@ -3,6 +3,7 @@ import { Folder, MessagesSquare } from "lucide-react";
 import ForumCard from "../ui/forum-card";
 import { motion } from "framer-motion";
 import { formatDateForLatestForum } from "../../utils/date-converter";
+import LoadingForumContent from "../ui/loading";
 
 export default function ForumItems({ forums, loading, posts }) {
   const forumGroupingByCategory = (forums) => {
@@ -37,31 +38,37 @@ export default function ForumItems({ forums, loading, posts }) {
                   transition={{ duration: 0.5, delay: index * 0.05 }}
                 >
                   <div className="flex p-4 transition duration-300 ease-in-out hover:bg-slate-100 w-full">
-                    <div className="flex gap-2 font-semibold justify-between">
-                      <MessagesSquare />
-                      <div className="flex gap-1 md:gap-4 flex-col md:flex-row">
-                        <div className="">
-                          <p className="hover:font-bold hover:opacity-90" title={forum.description}>
-                            {forum.title}
-                          </p>
-                        </div>
-                        <div className="flex gap-1 text-center">
-                          <p className="font-normal">Posts: </p>
-                          <p className="font-light">{postCount}</p>
-                        </div>
-                        <div>
-                          {latestPost ? (
-                            <div className="flex flex-col md:flex-row md:gap-1">
-                              <span>{latestPost.title},</span>
-                              <span>{latestPost.author.username},</span>
-                              <span>{formatDateForLatestForum(latestPost.createdAt)}</span>
-                            </div>
-                          ) : (
-                            <p className="text-red-500">No Post</p>
-                          )}
+                    {loading ? (
+                      <div>
+                        <LoadingForumContent />
+                      </div>
+                    ) : (
+                      <div className="flex gap-2 font-semibold justify-between">
+                        <MessagesSquare />
+                        <div className="flex gap-1 md:gap-4 flex-col md:flex-row">
+                          <div className="">
+                            <p className="hover:font-bold hover:opacity-90" title={forum.description}>
+                              {forum.title}
+                            </p>
+                          </div>
+                          <div className="flex gap-1 text-center">
+                            <p className="font-normal">Posts: </p>
+                            <p className="font-light">{postCount}</p>
+                          </div>
+                          <div>
+                            {latestPost ? (
+                              <div className="flex flex-col md:flex-row md:gap-1">
+                                <span>{latestPost.title},</span>
+                                <span>{latestPost.author.username},</span>
+                                <span>{formatDateForLatestForum(latestPost.createdAt)}</span>
+                              </div>
+                            ) : (
+                              <p className="text-red-500">No Post</p>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                 </motion.li>
               );

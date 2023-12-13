@@ -3,6 +3,7 @@ import Forums from "../components/forum/forums";
 import StatsCard from "../components/ui/stats-card";
 import { getAllForums } from "../api/forum-api";
 
+
 export default function ForumsPage() {
   const [loading, setLoading] = useState(false);
   const [forums, setForums] = useState([]);
