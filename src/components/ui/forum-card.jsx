@@ -21,9 +21,9 @@ export default function ForumCard({ title, children, id, icon }) {
   };
 
   return (
-    <motion.div className="border border-gray-200 rounded-tl-lg shadow mb-2 p dark:border-none">
+    <motion.div className="border border-gray-200 rounded-tl-lg shadow mb-2 p dark:border-none ">
       <div className="bg-dark-navy rounded-tl-lg">
-        <motion.h2 layout="position" onClick={handleToggle} className="flex text-white text-xl gap-2 py-3 px-4">
+        <motion.h2 layout="position" onClick={handleToggle} className="flex text-white text-xl gap-2 py-3 px-4 ">
           {icon}
           {title}
         </motion.h2>

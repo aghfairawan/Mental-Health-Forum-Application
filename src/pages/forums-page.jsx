@@ -13,7 +13,7 @@ export default function ForumsPage() {
       const data = await getAllForums();
       setForums(data.forums);
     } catch (error) {
-      console.error("Failed to fetch todos:", error);
+      console.error("Failed to fetch forums:", error);
     } finally {
       setLoading(false);
     }
@@ -22,7 +22,6 @@ export default function ForumsPage() {
   useEffect(() => {
     fetchForums();
   }, [fetchForums]);
-  // console.log(forums)
 
   return (
     <div className="flex flex-col md:flex-row gap-2   ">

@@ -9,3 +9,16 @@ export const getAllForums = async () => {
     throw error;
   }
 };
+
+export const getPostsByForumId = async (forumId) => {
+  try {
+    const response = await api.get(`/forum/${forumId}`, {
+      withCredentials: true,
+    });
+    // console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
