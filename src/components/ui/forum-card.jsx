@@ -21,21 +21,26 @@ export default function ForumCard({ title, children, id, icon }) {
   };
 
   return (
-    <motion.div className="border border-gray-200 rounded-tl-lg shadow mb-2 p">
+    <motion.div layout className="border border-gray-200 rounded-tl-lg shadow mb-2 p dark:border-none ">
       <div className="bg-dark-navy rounded-tl-lg">
-        <motion.h2 layout="position" onClick={handleToggle} className="text-white text-xl p-2">
-          {title}
+        <motion.h2 layout="position" onClick={handleToggle} className="flex text-white text-lg font-semibold gap-2 py-3 px-4 ">
           {icon}
+          {title}
         </motion.h2>
       </div>
+
       <AnimatePresence>
-        <motion.div >
-          {isOpen && (
-            <motion.div variants={forumCardVariants} transition={{ duration: 0.75 }} initial="closed" animate="open" exit="closed" className="bg-white">
-              {children}
-            </motion.div>
-          )}
-        </motion.div>
+        {isOpen && (
+          <motion.div 
+            variants={forumCardVariants} 
+            transition={{ duration: 0.35 }} 
+            initial="closed" 
+            animate="open" 
+            exit="closed" 
+            className="bg-white">
+            {children}
+          </motion.div>
+        )}
       </AnimatePresence>
     </motion.div>
   );

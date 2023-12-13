@@ -41,7 +41,7 @@ export default function ThemeBtn() {
   }, [theme]);
 
   return (
-    <button className="hover:opacity-70" type="button" onClick={toggleTheme} title="theme-btn">
+    <button className="hover:opacity-70 transition duration-300 ease-in-out" type="button" onClick={toggleTheme} title="theme-btn">
       {theme === "dark" ? <MoonStar /> : <Sun />}
     </button>
   );
