@@ -5,6 +5,8 @@ import { getMostRecentPosts } from "../../api/post-api";
 import { convertToInitial } from "../../utils/initial-converter";
 import { timePassed } from "../../utils/date-converter";
 import { socket } from "../../api/socket-client";
+import { motion } from "framer-motion";
+import { springVariants } from "../../utils/animate-variants";
 
 export default function MostRecentPosts() {
   const [recentPosts, setRecentPosts] = useState([]);
@@ -29,17 +31,17 @@ export default function MostRecentPosts() {
       fetchRecentPosts();
     };
 
-    socket.on("updateTopTenPosts", handleUpdatePosts);
+    socket.on("postCreated", handleUpdatePosts);
 
     return () => {
-      socket.off("updateTopTenPosts", handleUpdatePosts);
+      socket.off("postCreated", handleUpdatePosts);
     };
   }, [fetchRecentPosts]);
 
   return (
     <StatsCard title="Most Recent Posts" icon={<Pencil size={20} />}>
       {recentPosts.map((post) => (
-        <div key={post._id} className="mb-2 ">
+        <motion.div key={post._id} variants={springVariants} initial="initial" animate="animate" exit="exit" layout className="mb-2 ">
           <div className="grid grid-flow-col auto-cols-auto gap-2 justify-start items-center">
             <div className="relative text-xs font-medium inline-flex items-center justify-center w-7 h-7 overflow-hidden bg-gray-300 rounded-full" title={post.author.username}>
               {convertToInitial(post.author.username)}
@@ -53,7 +55,7 @@ export default function MostRecentPosts() {
             <span className="text-xs font-normal">{timePassed(post.createdAt)}</span>
           </div>
           <hr />
-        </div>
+        </motion.div>
       ))}
     </StatsCard>
   );
