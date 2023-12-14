@@ -45,18 +45,18 @@ export default function ForumItems({ forums, loading, posts }) {
                     </div>
                   ) : (
                     <>
-                      <div className="flex gap-2 h-10 pt-2">
+                      <div className="flex gap-2 h-10 items-center">
                         <MessagesSquare />
                         <p className="hover:font-bold hover:opacity-90 capitalize " title={forum.description}>
                           {forum.title}
                         </p>
                       </div>
-                      <div className="flex gap-1 md:justify-center h-10 pt-2 underline md:no-underline underline-offset-4">
+                      <div className="flex gap-1 md:justify-center items-center h-10 underline md:no-underline underline-offset-4">
                         <p className="font-semibold">
                           Posts: <span className="font-normal">{postCount}</span>
                         </p>
                       </div>
-                      <div className="h-10">
+                      <div className="h-10 items-center">
                         {latestPost ? (
                           <div className="flex flex-row md:flex-row gap-2 md:gap-1 ">
                             <div className="">
@@ -66,10 +66,10 @@ export default function ForumItems({ forums, loading, posts }) {
                               {/* <Avatar rounded placeholderInitials={convertToInitial(latestPost.author.username)} title={latestPost.author.username} className="bg-black" /> */}
                             </div>
                             <div className="flex flex-col">
-                              <p className=" line-clamp-1 hover:font-bold hover:opacity-90" title={latestPost.title}>
+                              <p className="line-clamp-1 text-sm hover:font-bold hover:opacity-90" title={latestPost.title}>
                                 {latestPost.title}
                               </p>
-                              <span className="font-light text-sm">{formatDateForLatestForum(latestPost.createdAt)}</span>
+                              <span className="font-light text-xs">{formatDateForLatestForum(latestPost.createdAt)}</span>
                             </div>
                           </div>
                         ) : (

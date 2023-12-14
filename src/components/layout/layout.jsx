@@ -6,7 +6,7 @@ export default function Layout() {
   const location = useLocation();
   const isAuthRoute = location.pathname === "/register" || location.pathname === "/login";
   return (
-    <div className="h-fit bg-light-theme text-custom-gray dark:bg-gradient-to-b from-main-dark to-sub-dark dark:text-white">
+    <div className="min-h-screen bg-light-theme text-custom-gray dark:bg-gradient-to-b from-main-dark to-sub-dark dark:text-white">
       <Navbar />
       <div className="flex flex-col max-w-screen-xl  mt-5 mx-auto px-2 lg:px-0">
         {!isAuthRoute && (

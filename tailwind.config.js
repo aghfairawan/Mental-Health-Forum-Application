@@ -26,6 +26,7 @@ export default {
       },
       backgroundColor: {
         "dark-navy": "#0C2B64",
+        "secondary-navy": "#274375",
         "light-navy": "#006CBE",
         "light-theme": "#F1F8FE",
         "main-dark": "#16161a",
@@ -38,10 +39,7 @@ export default {
     },
   },
   darkMode: "class",
-  plugins: [
-    require("flowbite/plugin"), 
-    require('tailwind-scrollbar')({ nocompatible: true }),
-  ],
+  plugins: [require("flowbite/plugin"), require("tailwind-scrollbar")({ nocompatible: true })],
   variants: {
     scrollbar: ["rounded"],
   },
