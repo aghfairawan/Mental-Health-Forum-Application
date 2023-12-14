@@ -2,7 +2,7 @@ import { Pencil } from "lucide-react";
 import StatsCard from "../ui/stats-card";
 import { useCallback, useEffect, useState } from "react";
 import { getMostRecentPosts } from "../../api/post-api";
-import { convertToInitial } from "../../utils/initial-converter";
+import { convertToInitial } from "../../utils/helper-converter";
 import { timePassed } from "../../utils/date-converter";
 import { socket } from "../../api/socket-client";
 import { motion } from "framer-motion";

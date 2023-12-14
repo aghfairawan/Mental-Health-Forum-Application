@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { formatDateForLatestForum } from "../../utils/date-converter";
 import LoadingForumContent from "../ui/loading";
 // import { Avatar } from "flowbite-react";
-import { convertToInitial } from "../../utils/initial-converter";
+import { convertToInitial, randomBgColor } from "../../utils/helper-converter";
 import { springVariants } from "../../utils/animate-variants";
 
 export default function ForumItems({ forums, loading, posts }) {
@@ -28,6 +28,7 @@ export default function ForumItems({ forums, loading, posts }) {
         <ForumCard title={category} id={category} key={index} icon={<Folder />}>
           <motion.div variants={springVariants} initial="initial" animate="animate" exit="exit" layout className="text-custom-gray divide-y divide-gray-200 dark:divide-gray-300 ">
             {forumsInCategory.map((forum) => {
+              const randomBgAvatar = randomBgColor();
               const postCount = posts[forum._id] ? posts[forum._id].length : 0;
               const forumPosts = posts[forum._id] || [];
               const latestPost = forumPosts.reduce((latest, current) => (new Date(latest.createdAt) > new Date(current.createdAt) ? latest : current), forumPosts[0]);
@@ -54,7 +55,7 @@ export default function ForumItems({ forums, loading, posts }) {
                         {latestPost ? (
                           <div className="flex flex-row md:flex-row gap-2 md:gap-1 ">
                             <div className="">
-                              <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-300 rounded-full" title={latestPost.author.username}>
+                              <div className={`relative inline-flex items-center justify-center w-10 h-10 overflow-hidden rounded-full ${randomBgAvatar}`} title={latestPost.author.username}>
                                 {convertToInitial(latestPost.author.username)}
                               </div>
                               {/* <Avatar rounded placeholderInitials={convertToInitial(latestPost.author.username)} title={latestPost.author.username} className="bg-black" /> */}
