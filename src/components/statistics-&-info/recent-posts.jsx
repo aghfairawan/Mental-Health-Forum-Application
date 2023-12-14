@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { getMostRecentPosts } from "../../api/post-api";
 import { convertToInitial } from "../../utils/initial-converter";
 import { timePassed } from "../../utils/date-converter";
+import { socket } from "../../api/socket-client";
 
 export default function MostRecentPosts() {
   const [recentPosts, setRecentPosts] = useState([]);
@@ -23,6 +24,16 @@ export default function MostRecentPosts() {
 
   useEffect(() => {
     fetchRecentPosts();
+
+    const handleUpdatePosts = () => {
+      fetchRecentPosts();
+    };
+
+    socket.on("updateTopTenPosts", handleUpdatePosts);
+
+    return () => {
+      socket.off("updateTopTenPosts", handleUpdatePosts);
+    };
   }, [fetchRecentPosts]);
 
   return (
