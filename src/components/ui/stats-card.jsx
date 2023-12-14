@@ -8,7 +8,7 @@ export default function StatsCard({ children, icon, title }) {
           {icon}
           <span className="font-bold text-sm">{title}</span>
         </div>
-        <div className="mx-4 my-5 text-custom-gray">{children}</div>
+        <div className="m-4 text-custom-gray">{children}</div>
       </div>
     </div>
   );
