@@ -26,6 +26,7 @@ export const AuthProvider = ({ children }) => {
       setUserPayload(null);
     }
   }, [accessToken]);
+  // console.log(userPayload)
 
   return <AuthContext.Provider value={{ isLoggedIn, accessToken, setAccessToken, userPayload }}>{children}</AuthContext.Provider>;
 };
