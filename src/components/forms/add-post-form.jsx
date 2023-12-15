@@ -1,9 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Button, Label, Select, TextInput } from "flowbite-react";
 
-
 export default function CreatePostForm({ forums, onSubmit, onForumSelect, titleRef, contentRef }) {
-
   const groupedForums = forums.reduce((acc, forum) => {
     if (!acc[forum.category]) {
       acc[forum.category] = [];
@@ -50,7 +48,12 @@ export default function CreatePostForm({ forums, onSubmit, onForumSelect, titleR
           <TextInput id="content" placeholder=". . . . . . . . ." ref={contentRef} required />
         </div>
         <div className="flex justify-end">
-          <Button type="submit">Create Post</Button>
+          <button
+            type="submit"
+            className="text-white bg-dark-navy hover:opacity-90 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-light-navy dark:hover:opacity-90 focus:outline-none dark:focus:ring-blue-800"
+          >
+            Create Post
+          </button>
         </div>
       </form>
     </div>
