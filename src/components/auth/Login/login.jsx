@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Lock, User, Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { loginApi } from "../../api/auth-api";
-import { useAuth } from "../../context/use-context";
+import { loginApi } from "../../../api/auth-api";
+import { useAuth } from "../../../context/use-context";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
