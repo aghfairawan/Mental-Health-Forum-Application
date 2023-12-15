@@ -67,6 +67,7 @@ const RegistrationForm = ({ username, setUsername, email, setEmail, password, se
                   placeholder="username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
+                  autoComplete="username"
                   required
                 />
                 {isTaken ? <span className="text-red-700 font-semibold text-sm ml-1">Username already taken</span> : undefined}
@@ -86,6 +87,7 @@ const RegistrationForm = ({ username, setUsername, email, setEmail, password, se
                   placeholder="name@company.com"
                   value={email}
                   onChange={handleEmailChange}
+                  autoComplete="email"
                   required
                 />
                 {validationErrors.email ? <span className="text-yellow-400 font-semibold text-sm ml-1">{validationErrors.email}</span> : undefined}
