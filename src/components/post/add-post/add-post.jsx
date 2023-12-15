@@ -1,14 +1,62 @@
-import { useState } from "react";
-import {  Modal} from "flowbite-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Modal } from "flowbite-react";
 import { PenSquare } from "lucide-react";
+import CreatePostForm from "../../forms/add-post-form";
+import { getAllForums } from "../../../api/forum-api";
+import { useAuth } from "../../../context/use-context";
+import { createPost } from "../../../api/post-api";
+import { message } from "antd";
 
 export default function AddPost() {
   const [openModal, setOpenModal] = useState(false);
+  const [forums, setForums] = useState([]);
+  const { accessToken } = useAuth();
+  const titleRef = useRef(null);
+  const contentRef = useRef(null);
+  const [selectedForum, setSelectedForum] = useState("");
 
-  function onCloseModal() {
+  const onCloseModal = () => {
     setOpenModal(false);
-  }
+  };
+  const handleForumSelect = (forumId) => {
+    setSelectedForum(forumId);
+  };
 
+  const fetchForums = useCallback(async () => {
+    try {
+      const data = await getAllForums();
+      setForums(data.forums);
+    } catch (error) {
+      console.error("Failed to fetch forums:", error);
+    }
+  }, []);
+
+  const handleAddPost = async (e) => {
+    e.preventDefault();
+
+    const title = titleRef.current.value;
+    const content = contentRef.current.value;
+
+    try {
+      await createPost(selectedForum, title, content, accessToken);
+      setOpenModal(false);
+      message.config({
+        top: 180,
+      });
+      message.success("New Post Added Successfully");
+
+      titleRef.current.value = "";
+      contentRef.current.value = "";
+      setSelectedForum("");
+    } catch (error) {
+      console.error("Failed to create post: ", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchForums();
+  }, [fetchForums]);
+  //   console.log(forums);
   return (
     <>
       <button
@@ -21,19 +69,13 @@ export default function AddPost() {
         <PenSquare size={20} />
         New Post
       </button>
-      <Modal show={openModal} size="md" onClose={onCloseModal} popup>
+      <Modal show={openModal} size="md" onClose={onCloseModal} position="top-center" className="pt-10" popup>
         <Modal.Header />
         <Modal.Body>
-          <div>a</div>
+          <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-6">Create a New Post</h3>
+          <CreatePostForm forums={forums} titleRef={titleRef} contentRef={contentRef} onSubmit={handleAddPost} onForumSelect={handleForumSelect} />
         </Modal.Body>
       </Modal>
     </>
   );
-}
-
-{
-  /* <Button onClick={() => setOpenModal(true)} size="xs" className="bg-red-500 hover:bg-transparent">
-  <PenSquare />
-  New Post
-</Button>; */
 }
