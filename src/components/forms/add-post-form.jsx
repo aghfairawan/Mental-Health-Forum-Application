@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Button, Label, Select, TextInput } from "flowbite-react";
+import { Label, Select, TextInput } from "flowbite-react";
 
 export default function CreatePostForm({ forums, onSubmit, onForumSelect, titleRef, contentRef }) {
   const groupedForums = forums.reduce((acc, forum) => {
