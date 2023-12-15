@@ -24,7 +24,7 @@ export default function LogoutBtn() {
   };
 
   return (
-    <div role="button" onClick={handleLogout} tabIndex={0}>
+    <div role="button" className="font-medium" onClick={handleLogout} tabIndex={0}>
       Logout
     </div>
   );
