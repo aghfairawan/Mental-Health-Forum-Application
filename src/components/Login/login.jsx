@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Lock, User, Eye, EyeOff } from 'lucide-react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { loginApi } from '../../api/auth-api';
 
 const LoginForm = () => {
     const [formData, setFormData] = useState({
@@ -24,7 +24,7 @@ const LoginForm = () => {
         e.preventDefault();
     
         try {
-            const response = await axios.post('http://localhost:8080/api/login', formData);
+            const response = await loginApi(formData.identifier, formData.password);
     
             
             const accessToken = response.data.accessToken;
