@@ -30,7 +30,7 @@ export default function Forums({ grabForums, grabLoadingState }) {
         fetchPostsPerForum(forum._id);
       });
     };
-    
+
     socket.on("postCreated", handleUpdatedPosts);
 
     return () => {

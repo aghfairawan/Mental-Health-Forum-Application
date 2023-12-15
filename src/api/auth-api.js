@@ -18,3 +18,17 @@ export const loginApi = async (identifier, password) => {
     throw error;
   }
 };
+
+export const registerApi = async (username, email, password) => {
+  try {
+    const response = await api.post("/register", {
+      username,
+      email,
+      password,
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
