@@ -5,7 +5,8 @@ import { motion } from "framer-motion";
 import { formatDateForLatestForum } from "../../utils/date-converter";
 import LoadingForumContent from "../ui/loading";
 // import { Avatar } from "flowbite-react";
-import { convertToInitial } from "../../utils/initial-converter";
+import { convertToInitial, randomBgColor } from "../../utils/helper-converter";
+import { springVariants } from "../../utils/animate-variants";
 
 export default function ForumItems({ forums, loading, posts }) {
   const forumGroupingByCategory = (forums) => {
@@ -25,15 +26,9 @@ export default function ForumItems({ forums, loading, posts }) {
     <div>
       {Object.entries(groupedForums).map(([category, forumsInCategory], index) => (
         <ForumCard title={category} id={category} key={index} icon={<Folder />}>
-          <motion.div
-            variants={{
-              open: { opacity: 1, y: 0 },
-              closed: { opacity: 0, y: -5 },
-            }}
-            transition={{ duration: 0.35, delay: 0.4 }}
-            className="text-custom-gray divide-y divide-gray-200 dark:divide-gray-300 "
-          >
+          <motion.div variants={springVariants} initial="initial" animate="animate" exit="exit" layout className="text-custom-gray divide-y divide-gray-200 dark:divide-gray-300 ">
             {forumsInCategory.map((forum) => {
+              const randomBgAvatar = randomBgColor();
               const postCount = posts[forum._id] ? posts[forum._id].length : 0;
               const forumPosts = posts[forum._id] || [];
               const latestPost = forumPosts.reduce((latest, current) => (new Date(latest.createdAt) > new Date(current.createdAt) ? latest : current), forumPosts[0]);
@@ -56,11 +51,11 @@ export default function ForumItems({ forums, loading, posts }) {
                           Posts: <span className="font-normal">{postCount}</span>
                         </p>
                       </div>
-                      <div className="h-10 items-center">
+                      <motion.div className="h-10 items-center">
                         {latestPost ? (
                           <div className="flex flex-row md:flex-row gap-2 md:gap-1 ">
                             <div className="">
-                              <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-300 rounded-full" title={latestPost.author.username}>
+                              <div className={`relative inline-flex items-center justify-center w-10 h-10 overflow-hidden rounded-full ${randomBgAvatar}`} title={latestPost.author.username}>
                                 {convertToInitial(latestPost.author.username)}
                               </div>
                               {/* <Avatar rounded placeholderInitials={convertToInitial(latestPost.author.username)} title={latestPost.author.username} className="bg-black" /> */}
@@ -75,7 +70,7 @@ export default function ForumItems({ forums, loading, posts }) {
                         ) : (
                           <p className="text-red-500 md:text-end mt-1">No Post</p>
                         )}
-                      </div>
+                      </motion.div>
                     </>
                   )}
                 </motion.div>
