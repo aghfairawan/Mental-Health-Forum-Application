@@ -5,6 +5,7 @@ import ForumPage from "./pages/forums-page";
 import UserProfileForm from "./components/userProfile/userProfile";
 import RegisterPage from "./pages/register-page";
 import LoginPage from "./pages/login-page";
+import ForumDetailPage from "./pages/forum-detail-page";
 
 function App() {
   const router = createBrowserRouter([
@@ -14,6 +15,10 @@ function App() {
         {
           path: "/",
           element: <ForumPage />,
+        },
+        {
+          path: "/forum/:title/:forumId",
+          element: <ForumDetailPage />,
         },
         {
           path: "/register",

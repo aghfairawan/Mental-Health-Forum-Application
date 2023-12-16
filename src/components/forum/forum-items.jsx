@@ -2,13 +2,16 @@
 import { Folder, MessagesSquare } from "lucide-react";
 import ForumCard from "../ui/forum-card";
 import { motion } from "framer-motion";
-import { formatDateForLatestForum } from "../../utils/date-converter";
+import { formatDateV2 } from "../../utils/date-converter";
 import LoadingForumContent from "../ui/loading";
 // import { Avatar } from "flowbite-react";
 import { convertToInitial, randomBgColor } from "../../utils/helper-converter";
 import { springVariants } from "../../utils/animate-variants";
+import { useNavigate } from "react-router-dom";
 
 export default function ForumItems({ forums, loading, posts }) {
+  const navigate = useNavigate();
+
   const forumGroupingByCategory = (forums) => {
     return forums.reduce((acc, forum) => {
       const category = forum.category;
@@ -42,7 +45,7 @@ export default function ForumItems({ forums, loading, posts }) {
                     <>
                       <div className="flex gap-2 h-10 items-center">
                         <MessagesSquare />
-                        <p className="hover:font-bold hover:opacity-90 capitalize " title={forum.description}>
+                        <p className="hover:font-bold hover:opacity-90 capitalize " title={forum.description} onClick={() => navigate(`/forum/${forum.title}/${forum._id}`)}>
                           {forum.title}
                         </p>
                       </div>
@@ -64,7 +67,7 @@ export default function ForumItems({ forums, loading, posts }) {
                               <p className="line-clamp-1 text-sm hover:font-bold hover:opacity-90" title={latestPost.title}>
                                 {latestPost.title}
                               </p>
-                              <span className="font-light text-xs">{formatDateForLatestForum(latestPost.createdAt)}</span>
+                              <span className="font-light text-xs">{formatDateV2(latestPost.createdAt)}</span>
                             </div>
                           </div>
                         ) : (

@@ -13,8 +13,4 @@ export default function StatsCard({ children, icon, title }) {
     </div>
   );
 }
-{
-  /* <p className="line-clamp-3  flex gap-4">
-<PieChart /> <PieChart /> <PieChart />
-</p> */
-}
+

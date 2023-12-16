@@ -35,7 +35,7 @@ export function timePassed(date) {
   return "Just now";
 }
 
-export function formatDateForLatestForum(isoString) {
+export function formatDateV2(isoString) {
   const date = new Date(isoString);
   const today = new Date();
   const yesterday = new Date(today);
