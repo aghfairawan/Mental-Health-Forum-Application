@@ -33,17 +33,17 @@ export default function ForumStatistics() {
         </div>
       ) : (
         <div className="flex flex-col gap-2 ">
-          <div className="flex gap-2 font-medium items-center">
+          <div className="flex gap-2 text-sm items-center">
             <Users />
-            <span>{stats.totalMembers}</span>
+            <span>Members: {stats.totalMembers}</span>
           </div>
-          <div className="flex gap-2 font-medium items-center">
+          <div className="flex gap-2 text-sm items-center">
             <BookMarked />
-            <span>{stats.totalPosts}</span>
+            <span>Posts: {stats.totalPosts}</span>
           </div>
-          <div className="flex gap-2 font-medium items-center">
+          <div className="flex gap-2 text-sm items-center">
             <MessagesSquare />
-            <span>{stats.totalComments}</span>
+            <span>Replies: {stats.totalComments}</span>
           </div>
         </div>
       )}
