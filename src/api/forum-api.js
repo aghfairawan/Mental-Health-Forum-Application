@@ -22,3 +22,14 @@ export const getPostsByForumId = async (forumId) => {
     throw error;
   }
 };
+
+export const getForumStats = async () => {
+  try {
+    const response = await api.get("/forum/stats", { withCredentials: true });
+    // console.log(response)
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};

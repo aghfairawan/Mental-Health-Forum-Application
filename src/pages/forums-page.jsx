@@ -4,6 +4,7 @@ import { getAllForums } from "../api/forum-api";
 import SocialInfo from "../components/statistics-&-info/social-info";
 import MostRecentPosts from "../components/statistics-&-info/recent-posts";
 import AddPost from "../components/post/add-post/add-post";
+import ForumStatistics from "../components/statistics-&-info/forum-stats";
 
 export default function ForumsPage() {
   const [loading, setLoading] = useState(false);
@@ -40,6 +41,7 @@ export default function ForumsPage() {
           <AddPost />
         </div>
         <div className="mt-2 mb-5">
+          <ForumStatistics />
           <SocialInfo />
           <MostRecentPosts />
         </div>

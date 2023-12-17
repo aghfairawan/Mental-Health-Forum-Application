@@ -33,7 +33,7 @@ export default function ForumCard({ title, children, id, icon }) {
         {isOpen && (
           <motion.div 
             variants={forumCardVariants} 
-            transition={{ duration: 0.35 }} 
+            transition={{ duration: 0.50 }} 
             initial="closed" 
             animate="open" 
             exit="closed" 
