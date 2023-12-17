@@ -7,6 +7,7 @@ import { timePassed } from "../../utils/date-converter";
 import { socket } from "../../api/socket-client";
 import { motion } from "framer-motion";
 import { springVariants } from "../../utils/animate-variants";
+import LoadingForumContent from "../ui/loading";
 
 export default function MostRecentPosts() {
   const [recentPosts, setRecentPosts] = useState([]);
@@ -40,23 +41,31 @@ export default function MostRecentPosts() {
 
   return (
     <StatsCard title="Most Recent Posts" icon={<Pencil size={20} />}>
-      {recentPosts.map((post) => (
-        <motion.div key={post._id} variants={springVariants} initial="initial" animate="animate" exit="exit" layout className="mb-2 ">
-          <div className="grid grid-flow-col auto-cols-auto gap-2 justify-start items-center">
-            <div className="relative text-xs font-medium inline-flex items-center justify-center w-7 h-7 overflow-hidden bg-gray-300 rounded-full" title={post.author.username}>
-              {convertToInitial(post.author.username)}
-            </div>
-            <div>
-              <p className="text-sm font-medium line-clamp-1 hover:underline underline-offset-2">{post.title}</p>
-            </div>
-          </div>
-          <div className="mb-2">
-            <p className="line-clamp-3 text-xs font-normal">{post.content}</p>
-            <span className="text-xs font-normal">{timePassed(post.createdAt)}</span>
-          </div>
-          <hr />
-        </motion.div>
-      ))}
+      {loading ? (
+        <div className="my-10">
+          <LoadingForumContent />
+        </div>
+      ) : (
+        <>
+          {recentPosts.map((post) => (
+            <motion.div key={post._id} variants={springVariants} initial="initial" animate="animate" exit="exit" layout className="mb-2 ">
+              <div className="grid grid-flow-col auto-cols-auto gap-2 justify-start items-center">
+                <div className="relative text-xs font-medium inline-flex items-center justify-center w-7 h-7 overflow-hidden bg-gray-300 rounded-full" title={post.author.username}>
+                  {convertToInitial(post.author.username)}
+                </div>
+                <div>
+                  <p className="text-sm font-medium line-clamp-1 hover:underline underline-offset-2">{post.title}</p>
+                </div>
+              </div>
+              <div className="mb-2">
+                <p className="line-clamp-3 text-xs font-normal">{post.content}</p>
+                <span className="text-xs font-normal">{timePassed(post.createdAt)}</span>
+              </div>
+              <hr />
+            </motion.div>
+          ))}{" "}
+        </>
+      )}
     </StatsCard>
   );
 }
