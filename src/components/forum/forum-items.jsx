@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { formatDateV2 } from "../../utils/date-converter";
 import LoadingForumContent from "../ui/loading";
 // import { Avatar } from "flowbite-react";
-import { convertToInitial, randomBgColor } from "../../utils/helper-converter";
+import { convertToInitial, createSlug, randomBgColor } from "../../utils/helper-converter";
 import { springVariants } from "../../utils/animate-variants";
 import { useNavigate } from "react-router-dom";
 
@@ -32,6 +32,7 @@ export default function ForumItems({ forums, loading, posts }) {
           <motion.div variants={springVariants} initial="initial" animate="animate" exit="exit" layout className="text-custom-gray divide-y divide-gray-200 dark:divide-gray-300 ">
             {forumsInCategory.map((forum) => {
               const randomBgAvatar = randomBgColor();
+              const titleSlug = createSlug(forum.title);
               const postCount = posts[forum._id] ? posts[forum._id].length : 0;
               const forumPosts = posts[forum._id] || [];
               const latestPost = forumPosts.reduce((latest, current) => (new Date(latest.createdAt) > new Date(current.createdAt) ? latest : current), forumPosts[0]);
@@ -45,7 +46,7 @@ export default function ForumItems({ forums, loading, posts }) {
                     <>
                       <div className="flex gap-2 h-10 items-center">
                         <MessagesSquare />
-                        <p className="hover:font-bold hover:opacity-90 capitalize " title={forum.description} onClick={() => navigate(`/forum/${forum.title}/${forum._id}`)}>
+                        <p className="hover:font-bold hover:opacity-90 capitalize " title={forum.description} onClick={() => navigate(`/forum/${titleSlug}/${forum._id}`)}>
                           {forum.title}
                         </p>
                       </div>

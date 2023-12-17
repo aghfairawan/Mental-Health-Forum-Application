@@ -32,3 +32,8 @@ export const randomBgColor = () => {
   const randomIndex = Math.floor(Math.random() * bgColors.length);
   return bgColors[randomIndex];
 };
+
+
+export const createSlug = (title) => {
+  return title.toLowerCase().replace(/\s+/g, '-');
+};
