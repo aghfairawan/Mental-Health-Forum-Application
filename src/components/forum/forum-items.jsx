@@ -46,7 +46,7 @@ export default function ForumItems({ forums, loading, posts }) {
                     <>
                       <div className="flex gap-2 h-10 items-center">
                         <MessagesSquare />
-                        <p className="hover:font-bold hover:opacity-90 capitalize " title={forum.description} onClick={() => navigate(`/forum/${titleSlug}/${forum._id}`)}>
+                        <p className="hover:font-bold hover:opacity-90 capitalize " title={forum.description} onClick={() => navigate(`/forum/${titleSlug}/${forum._id}/1`)}>
                           {forum.title}
                         </p>
                       </div>

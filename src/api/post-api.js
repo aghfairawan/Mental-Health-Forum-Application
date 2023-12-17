@@ -29,3 +29,5 @@ export const createPost = async (forumId, title, content, token) => {
     throw error;
   }
 };
+
+

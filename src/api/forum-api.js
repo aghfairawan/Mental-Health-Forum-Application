@@ -33,3 +33,19 @@ export const getForumStats = async () => {
     throw error;
   }
 };
+
+export const getPaginatedPostsOnSpecificForum = async (forumId, page) => {
+  try {
+    const response = await api.get(`/forum/${forumId}/posts`, {
+      withCredentials: true,
+      params: {
+        page: page,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};

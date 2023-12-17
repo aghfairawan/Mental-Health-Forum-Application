@@ -17,7 +17,7 @@ function App() {
           element: <ForumPage />,
         },
         {
-          path: "/forum/:title/:forumId",
+          path: "/forum/:title/:forumId/:page",
           element: <ForumDetailPage />,
         },
         {
