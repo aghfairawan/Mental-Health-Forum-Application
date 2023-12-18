@@ -17,6 +17,7 @@ export default function ForumDetailPage() {
   const title = params.title;
   const currentPage = parseInt(params.page) || 1;
 
+
   const fetchPosts = useCallback(async () => {
     setLoading(true);
     try {

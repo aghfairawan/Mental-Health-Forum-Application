@@ -6,6 +6,7 @@ import UserProfileForm from "./components/userProfile/userProfile";
 import RegisterPage from "./pages/register-page";
 import LoginPage from "./pages/login-page";
 import ForumDetailPage from "./pages/forum-detail-page";
+import PostPage from "./pages/post-page";
 
 function App() {
   const router = createBrowserRouter([
@@ -19,6 +20,10 @@ function App() {
         {
           path: "/forum/:title/:forumId/:page",
           element: <ForumDetailPage />,
+        },
+        {
+          path: "/forum/post",
+          element: <PostPage />,
         },
         {
           path: "/register",

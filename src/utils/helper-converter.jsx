@@ -1,4 +1,7 @@
 export function convertToInitial(username) {
+  if (!username) {
+    return "";
+  }
   return username
     .split(" ")
     .map((part) => part[0])
@@ -33,7 +36,6 @@ export const randomBgColor = () => {
   return bgColors[randomIndex];
 };
 
-
 export const createSlug = (title) => {
-  return title.toLowerCase().replace(/\s+/g, '-');
+  return title.toLowerCase().replace(/\s+/g, "-");
 };

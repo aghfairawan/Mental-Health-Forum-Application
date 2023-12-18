@@ -30,4 +30,12 @@ export const createPost = async (forumId, title, content, token) => {
   }
 };
 
-
+export const getPost = async (postId) => {
+  try {
+    const response = await api.get(`/post/${postId}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
