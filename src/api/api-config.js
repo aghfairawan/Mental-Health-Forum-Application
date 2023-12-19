@@ -1,5 +1,8 @@
 import axios from "axios";
 
+// baseURL: "https://final-project-image-wo3wakb2jq-wl.a.run.app/api",
+// baseURL: "http://localhost:8080/api",
+
 export const api = axios.create({
   baseURL: "http://localhost:8080/api",
 });

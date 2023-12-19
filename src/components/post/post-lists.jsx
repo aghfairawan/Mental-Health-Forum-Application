@@ -32,7 +32,7 @@ export default function PostLists({ posts, loading, currentPage, onPageChange, t
               {posts.map((post) => {
                 const postSlug = createSlug(post.title);
                 const onClickPost = () => {
-                  navigate(`/forum/post/${postSlug}`, { state: { postId: post._id } });
+                  navigate(`/forum/post/${postSlug}/1`, { state: { postId: post._id } });
                 };
                 return (
                   <motion.div key={post._id} variants={springVariants} initial="initial" animate="animate" exit="exit" layout className="grid md:grid-cols-5 mb-2 pt-2 gap-2 ">
