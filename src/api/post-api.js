@@ -30,9 +30,14 @@ export const createPost = async (forumId, title, content, token) => {
   }
 };
 
-export const getPost = async (postId) => {
+export const getPost = async (postId, page) => {
   try {
-    const response = await api.get(`/post/${postId}`);
+    const response = await api.get(`/post/${postId}`, {
+      withCredentials: true,
+      params: {
+        commentPage: page,
+      },
+    } );
     return response.data;
   } catch (error) {
     console.error(error);
