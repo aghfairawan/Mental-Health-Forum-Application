@@ -3,6 +3,7 @@ import PostDetail from "../components/post/post-detail";
 import { useCallback, useEffect, useState } from "react";
 import { getPost } from "../api/post-api";
 import Comment from "../components/comment/post-comment";
+import { socket } from "../api/socket-client";
 
 export default function PostPage() {
   const location = useLocation();
@@ -25,6 +26,15 @@ export default function PostPage() {
 
   useEffect(() => {
     fetchPostDetail();
+
+    const handleUpdatePostDetail = () => {
+      fetchPostDetail();
+    };
+    socket.on("commentCreated", handleUpdatePostDetail);
+
+    return () => {
+      socket.off("commentCreated", handleUpdatePostDetail);
+    };
   }, [fetchPostDetail]);
 
   return (
