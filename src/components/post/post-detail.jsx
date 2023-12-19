@@ -16,9 +16,10 @@ export default function PostDetail({ post, loading }) {
       ) : (
         <>
           <div className=" bg-dark-navy pt-4 pb-2 pr-2 pl-4 shadow mt-5 mb-1 text-white rounded-t-lg">
-            <h1 className="text-xl font-semibold">{post.title}</h1>
+            <h1 className="text-lg font-semibold">{post.title}</h1>
             <span className="flex justify-end items-center text-xs md:text-sm font-normal gap-1">
-            <Clock size={15} />{formatDateV2(post.createdAt)} by {post.author.username}
+              <Clock size={15} />
+              {formatDateV2(post.createdAt)} by {post.author.username}
             </span>
           </div>
           <div className="flex md:flex-row md:gap-0 bg-white border-gray-200 border-solid border-2 shadow">
