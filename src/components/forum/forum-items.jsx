@@ -39,7 +39,7 @@ export default function ForumItems({ forums, loading, posts }) {
               return (
                 <motion.div key={forum._id} className="grid md:grid-cols-3 p-4 gap-0 md:gap-2 font-semibold transition duration-300 ease-in-out hover:bg-slate-100 ">
                   {loading ? (
-                    <div>
+                    <div className="-ml-28">
                       <LoadingForumContent />
                     </div>
                   ) : (
