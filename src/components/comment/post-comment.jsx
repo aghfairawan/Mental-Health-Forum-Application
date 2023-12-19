@@ -11,10 +11,13 @@ export default function Comment({ grabPostId }) {
   const textRef = useRef(null);
   const { accessToken } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleCommentToPost = async (e) => {
-    setLoading(true);
     e.preventDefault();
+    setLoading(true);
+    setError("");
+
     const text = textRef.current.value;
 
     try {
@@ -26,6 +29,7 @@ export default function Comment({ grabPostId }) {
       textRef.current.value = "";
     } catch (error) {
       console.error("Failed to create comment: ", error);
+      setError("You Must Logged-In First");
     } finally {
       setLoading(false);
     }
@@ -56,6 +60,7 @@ export default function Comment({ grabPostId }) {
                 ref={textRef}
                 required
               ></textarea>
+              {error && <span className="text-red-500 text-sm font-semibold italic">{error}</span>}
               <Button size="xs" className="bg-dark-navy dark:bg-dark-navy mt-2 " type="submit">
                 {loading ? <Spinner className="mr-2" size="sm" /> : <span>Post Reply</span>}
               </Button>
