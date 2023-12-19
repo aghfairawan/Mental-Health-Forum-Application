@@ -3,7 +3,6 @@ import { PenLine } from 'lucide-react';
 import ThisPage from '../setting-profile/thisPage';
 
 const UserProfileForm = () => {
-  // Sample existing user data
   const initialUserData = {
     username: 'JohnDoe',
     address: '123 Main St',
@@ -18,9 +17,10 @@ const UserProfileForm = () => {
     bio: initialUserData.bio,
   });
 
-  const handleProfileChange = () => {
+  const [isEditing, setIsEditing] = useState(false);
 
-    console.log('Handle profile change clicked');
+  const handleProfileChange = () => {
+    setIsEditing(!isEditing);
   };
 
   const handleChange = (e) => {
@@ -32,16 +32,15 @@ const UserProfileForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     console.log('Form submitted:', formData);
-
+    setIsEditing(false);
   };
 
   return (
     <div>
       <div className="flex flex-col md:flex-row h-full">
-        <div className="w-full md:w-3/4 flex flex-col">
-          <div className='mb-8'>
+        <div className="w-full md:w-3/4 flex flex-col overflow-auto max-h-screen">
+          <div className="mb-8">
             <div className="flex flex-col md:flex-row">
               <div className="w-full md:w-1/4 bg-gray-100">
                 <h2 className="text-2xl font-bold mb-6 md:mb-0 ml-10">Profile</h2>
@@ -49,43 +48,81 @@ const UserProfileForm = () => {
 
               <div className="w-full md:w-3/4 bg-white rounded-lg shadow dark:border dark:bg-gray-800 dark:border-gray-700">
                 <form onSubmit={handleSubmit} className="p-6">
-                  <div className="mb-4 md:ml-10 flex items-center ">
+                  <div className="mb-4 md:ml-10 flex items-center">
                     <label htmlFor="username" className="block text-sm font-medium text-gray-700 w-16">
                       Username
                     </label>
-                    <p className="mt-1 md:ml-20 p-2 ">{formData.username}</p>
-                    <button
-                      type="button"
-                      className="ml-auto md:mr-10 px-4 py-2 bg-blue-500 text-white rounded-md flex items-center hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
-                      onClick={handleProfileChange}
-                    >
-                      <PenLine className="mr-5" />
-                      Change
-                    </button>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        value={formData.username}
+                        onChange={handleChange}
+                        className="mt-1 md:ml-4 p-2 w-full rounded-md"
+                      />
+                    ) : (
+                      <p className="mt-1 md:ml-4 p-2">{formData.username}</p>
+                    )}
                   </div>
-                  <div className="mb-4 ml-10 flex items-center">
-                    <label htmlFor="address" className="block text-sm font-medium text-gray-700 w-16">
+                  <div className="mb-4 md:ml-10 flex items-center">
+                    <label htmlFor="bio" className="block text-sm font-medium text-gray-700 w-16">
                       Address
                     </label>
-                    <p className="mt-1 ml-20 p-2 ">{formData.address}</p>
+                    {isEditing ? (
+                      <textarea
+                        id="address"
+                        name="address"
+                        value={formData.address}
+                        onChange={handleChange}
+                        className="mt-1 md:ml-4 p-2 border rounded-md w-full"
+                      ></textarea>
+                    ) : (
+                      <p className="mt-1 md:ml-4 p-2">{formData.address}</p>
+                    )}
                   </div>
-                  <div className="mb-4 ml-10 flex items-center">
+                  <div className="mb-4 md:ml-10 flex items-center">
                     <label htmlFor="country" className="block text-sm font-medium text-gray-700 w-16">
                       Country
                     </label>
-                    <p className="mt-1 ml-20 p-2 ">{formData.country}</p>
+                    {isEditing ? (
+                      <input
+                        type="text"
+                        id="country"
+                        name="country"
+                        value={formData.country}
+                        onChange={handleChange}
+                        className="mt-1 md:ml-4 p-2 w-full rounded-md"
+                      />
+                    ) : (
+                      <p className="mt-1 md:ml-4 p-2">{formData.country}</p>
+                    )}
                   </div>
-                  <div className="mb-4 ml-10 flex items-center">
+                  <div className="mb-4 md:ml-10 flex items-center">
                     <label htmlFor="bio" className="block text-sm font-medium text-gray-700 w-16">
                       Bio
                     </label>
-                    <textarea
-                      id="bio"
-                      name="bio"
-                      value={formData.bio}
-                      onChange={handleChange}
-                      className="mt-1 ml-20 p-2 border rounded-md w-150"
-                    ></textarea>
+                    {isEditing ? (
+                      <textarea
+                        id="bio"
+                        name="bio"
+                        value={formData.bio}
+                        onChange={handleChange}
+                        className="mt-1 md:ml-4 p-2 border rounded-md w-full"
+                      ></textarea>
+                    ) : (
+                      <p className="mt-1 md:ml-4 p-2">{formData.bio}</p>
+                    )}
+                  </div>
+                  <div className="mb-4 md:ml-10 md:flex md:items-center">
+                    <button
+                      type="button"
+                      className="ml-auto md:mr-4 mt-4 md:mt-0 px-4 py-2 bg-blue-500 text-white rounded-md flex items-center hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+                      onClick={handleProfileChange}
+                    >
+                      <PenLine className="mr-5" />
+                      {isEditing ? 'Save' : 'Change'}
+                    </button>
                   </div>
                 </form>
               </div>
@@ -111,7 +148,7 @@ const UserProfileForm = () => {
                     <button
                       type="button"
                       className="px-8 py-2 bg-blue-500 text-white rounded-md flex items-center hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
-                      onClick={handleProfileChange}
+                      onClick={handleSubmit}
                     >
                       <PenLine className="mr-5" />
                       Change
@@ -124,7 +161,7 @@ const UserProfileForm = () => {
             </div>
           </div>
         </div>
-        <div className="h-full md:w-1/4 ml-4" >
+        <div className="h-full md:w-1/6 ml-20 mt-5" >
 
           <ThisPage />
         </div >
