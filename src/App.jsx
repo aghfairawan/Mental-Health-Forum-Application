@@ -22,7 +22,7 @@ function App() {
           element: <ForumDetailPage />,
         },
         {
-          path: "/forum/post",
+          path: "/forum/post/:postTitle",
           element: <PostPage />,
         },
         {
