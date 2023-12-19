@@ -15,14 +15,14 @@ export default function PostDetail({ post, loading }) {
         </div>
       ) : (
         <>
-          <div className=" bg-dark-navy pt-4 pb-2 pr-2 pl-4 shadow mt-5 mb-1 text-white rounded-t-lg">
+          <div className=" bg-dark-navy pt-2 pb-2 pr-2 pl-4 shadow mt-5 mb-1 text-white rounded-t-lg">
             <h1 className="text-lg font-semibold">{post.title}</h1>
             <span className="flex justify-end items-center text-xs md:text-sm font-normal gap-1">
               <Clock size={15} />
               {formatDateV2(post.createdAt)} by {post.author.username}
             </span>
           </div>
-          <div className="flex md:flex-row md:gap-0 bg-white border-gray-200 border-solid border-2 shadow">
+          <div className="flex md:flex-row md:gap-0 bg-white border-gray-200 border-solid border-2 shadow text-custom-gray">
             <div className="flex flex-col justify-start md:justify-center items-center p-1 md:p-4 border-gray-200 border-r-2">
               <div className="relative  md:text-4xl font-medium inline-flex items-center justify-center w-10 h-10 md:w-24 md:h-24 overflow-hidden bg-gray-300 rounded-full">{convertToInitial(post.author.username)}</div>
               <div>
@@ -35,7 +35,7 @@ export default function PostDetail({ post, loading }) {
           </div>
           <div>
             {post.comments.map((comment) => (
-              <div key={comment._id} className="flex md:flex-row md:gap-0 my-2 shadow bg-white border-gray-200 border-solid border-2 ">
+              <div key={comment._id} className="flex md:flex-row md:gap-0 my-2 shadow bg-white border-gray-200 border-solid border-2 text-custom-gray">
                 <div className="flex flex-col justify-start md:justify-center  items-center p-1 md:p-4 border-gray-200 border-r-2">
                   <div className="relative  md:text-4xl font-medium inline-flex items-center justify-center w-10 h-10 md:w-24 md:h-24 overflow-hidden bg-gray-300 rounded-full">{convertToInitial(comment.commenter.username)}</div>
                   <div className="">

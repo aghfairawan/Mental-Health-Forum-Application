@@ -2,13 +2,14 @@ import { useLocation } from "react-router-dom";
 import PostDetail from "../components/post/post-detail";
 import { useCallback, useEffect, useState } from "react";
 import { getPost } from "../api/post-api";
+import Comment from "../components/comment/post-comment";
 
 export default function PostPage() {
   const location = useLocation();
   const postId = location.state?.postId;
   const [post, setPost] = useState({ comments: [], author: {} });
   const [loading, setLoading] = useState(false);
-//   console.log(post);
+  //   console.log(post);
 
   const fetchPostDetail = useCallback(async () => {
     setLoading(true);
@@ -27,8 +28,9 @@ export default function PostPage() {
   }, [fetchPostDetail]);
 
   return (
-    <div>
+    <div className="flex flex-col">
       <PostDetail post={post} loading={loading} />
+      <Comment grabPostId={postId} />
     </div>
   );
 }

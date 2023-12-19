@@ -39,3 +39,21 @@ export const getPost = async (postId) => {
     throw error;
   }
 };
+
+export const commentToPost = async (postId, text, token) => {
+  try {
+    const response = await api.post(
+      `/comment/${postId}`,
+      {
+        text,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
