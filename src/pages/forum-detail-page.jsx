@@ -51,7 +51,7 @@ export default function ForumDetailPage() {
           <PostLists posts={posts} loading={loading} currentPage={currentPage} onPageChange={onPageChange} totalPages={totalPages} />
         </div>
       </div>
-      <div className="md:w-1/4 md:h-screen md:scrollbar-thin scrollbar-thumb-light-navy scrollbar-track-blue-300 overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full px-1">
+      <div className="md:w-1/4 pb-10 md:h-screen md:scrollbar-thin scrollbar-thumb-light-navy scrollbar-track-blue-300 overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full px-1">
         <div className="hidden md:flex justify-start mt-2 ">
           <AddPost />
         </div>
