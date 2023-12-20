@@ -52,7 +52,7 @@ export default function PostPage() {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col mb-10 md:mb-20">
       <PostDetail post={post} loading={loading} />
       <Pagination showIcons currentPage={currentPage} totalPages={totalCommentPages} onPageChange={onNextComment} className="flex justify-end mb-4" />
       <Comment grabPostId={storedPostId} />
