@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Label, Select, TextInput } from "flowbite-react";
+import { Label, Select, TextInput, Textarea } from "flowbite-react";
 
 export default function CreatePostForm({ forums, onSubmit, onForumSelect, titleRef, contentRef }) {
   const groupedForums = forums.reduce((acc, forum) => {
@@ -23,7 +23,7 @@ export default function CreatePostForm({ forums, onSubmit, onForumSelect, titleR
             <Label htmlFor="forums" value="Select which forum you want to post" />
           </div>
           <Select id="forums" onChange={handleForumChange} required>
-            {/* <option className="font-semibold select-none">Select the forum where you want to post</option> */}
+            <option className="font-semibold select-none">Select the forum where you want to post</option>
             {Object.entries(groupedForums).map(([category, forumsInCategory]) => (
               <optgroup className="font-semibold" label={category} key={category}>
                 {forumsInCategory.map((forum) => (
@@ -45,7 +45,7 @@ export default function CreatePostForm({ forums, onSubmit, onForumSelect, titleR
           <div className="mb-2">
             <Label htmlFor="content" value="Write your content" />
           </div>
-          <TextInput id="content" placeholder=". . . . . . . . ." ref={contentRef} required />
+          <Textarea id="content" about="post-content" className="h-40" placeholder=". . . . . . . . ." ref={contentRef} required />
         </div>
         <div className="flex justify-end">
           <button
