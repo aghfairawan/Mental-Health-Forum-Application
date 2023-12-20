@@ -28,7 +28,7 @@ export default function ForumsPage() {
 
   return (
     <div className="flex flex-col md:flex-row gap-2 ">
-      <div className="md:w-3/4 md:h-screen md:scrollbar-thin scrollbar-thumb-light-navy scrollbar-track-blue-300 overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full pr-1">
+      <div className="md:w-3/4 md:h-120vh md:scrollbar-thin scrollbar-thumb-light-navy scrollbar-track-blue-300 overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full pr-1">
         <div className="flex justify-end mt-5 md:hidden ">
           <AddPost />
         </div>
@@ -36,7 +36,7 @@ export default function ForumsPage() {
           <Forums grabForums={forums} grabLoadingState={loading} />
         </div>
       </div>
-      <div className="md:w-1/4 md:h-screen md:scrollbar-thin scrollbar-thumb-light-navy scrollbar-track-blue-300 overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full px-1">
+      <div className="md:w-1/4 md:h-120vh md:scrollbar-thin scrollbar-thumb-light-navy scrollbar-track-blue-300 overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full px-1">
         <div className="hidden md:flex justify-start mt-2 ">
           <AddPost />
         </div>

@@ -34,7 +34,7 @@ export default function RegisterPage() {
 
   return (
     <>
-      <div className="h-fit mt-5 md:mt-16">
+      <div className="h-80vh mt-5 md:mt-16">
         <RegistrationForm username={username} setUsername={setUsername} email={email} setEmail={setEmail} password={password} setPassword={setPassword} onSubmit={handleSubmit} error={error} loading={loading} />
       </div>
     </>

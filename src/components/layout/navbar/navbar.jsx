@@ -19,8 +19,8 @@ export default function Navbar() {
       <nav className="sticky top-0 w-full z-50 bg-dark-navy text-white">
         <div className="flex max-w-7xl mx-auto items-center justify-between gap-10 py-2 px-1 lg:px-0">
           <div className="font-semibold">
-            <h1>Good Health & </h1>
-            <span>Well-Being Forum</span>
+            <h1>Health Haven </h1>
+            <span className="">Forum</span>
           </div>
           <div className="hidden md:flex gap-5 grow">
             <NavLinks />

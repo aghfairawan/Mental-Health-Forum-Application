@@ -31,7 +31,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="h-fit mt-5 md:mt-16">
+    <div className="h-80vh mt-5 md:mt-16">
       <LoginForm
         identifier={identifier}
         setIdentifier={setIdentifier}
