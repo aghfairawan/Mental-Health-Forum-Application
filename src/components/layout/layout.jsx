@@ -7,7 +7,7 @@ export default function Layout() {
   const location = useLocation();
   const isAuthRoute = location.pathname === "/register" || location.pathname === "/login";
   return (
-    <div className="min-h-fit overflow-hidden bg-light-theme text-custom-gray dark:bg-main-dark dark:text-white">
+    <div className="min-h-fit  bg-light-theme text-custom-gray dark:bg-main-dark dark:text-white">
       <Navbar />
       <div className="flex flex-col max-w-screen-xl mt-5 mx-auto px-2 lg:px-0 ">
         {!isAuthRoute && (
@@ -21,6 +21,5 @@ export default function Layout() {
     </div>
   );
 }
-
 
 // md:sticky md:top-16 md:z-20  breadcrumb class

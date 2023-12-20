@@ -14,7 +14,8 @@ export default {
       height: {
         "19/20": "95%",
         "120vh": "120vh",
-        "80vh" : "80vh"
+        "80vh" : "80vh",
+        "200vh": "200vh"
       },
       width: {
         86: "21.5rem",
