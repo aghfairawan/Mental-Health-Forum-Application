@@ -39,7 +39,7 @@ export default function CreatePostForm({ forums, onSubmit, onForumSelect, titleR
           <div className="mb-2">
             <Label htmlFor="title" value="Write your post title" />
           </div>
-          <TextInput id="title" placeholder="ex: self-introduction" ref={titleRef} required />
+          <TextInput id="title" placeholder="ex: self-introduction" ref={titleRef} required autoComplete="off" />
         </div>
         <div>
           <div className="mb-2">
