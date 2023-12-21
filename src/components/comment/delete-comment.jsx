@@ -4,6 +4,7 @@ import { useAuth } from "../../context/use-context";
 import { deleteCommentApi } from "../../api/post-api";
 import { message } from "antd";
 import { useState } from "react";
+import { Spinner } from "flowbite-react";
 
 export default function DeleteComment({ postId, commentId, onDeleted }) {
   const { accessToken } = useAuth();
@@ -30,7 +31,7 @@ export default function DeleteComment({ postId, commentId, onDeleted }) {
 
   return (
     <button type="submit" onClick={handleDelete} className="hover:text-red-700">
-      <Trash2 size={18} />
+      {loading ? <Spinner size="sm" /> : <Trash2 size={18} />}
     </button>
   );
 }
