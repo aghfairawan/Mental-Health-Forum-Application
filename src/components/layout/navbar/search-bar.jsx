@@ -37,6 +37,7 @@ export default function SearchNavbar() {
           placeholder="Search forums"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          autoComplete="off"
           className="block w-80 p-1 ps-10 text-sm border border-blue-600 rounded-2xl bg-white focus:ring-1 focus:ring-blue-600 placeholder-gray-400 text-custom-gray"
         />
         <button type="submit" className="absolute top-0 end-0 px-3  text-sm font-medium h-full bg-dark-navy md:bg-light-navy rounded-e-2xl border border-none hover:opacity-80 focus:ring-2 focus:outline-none focus:ring-blue-300 ">
