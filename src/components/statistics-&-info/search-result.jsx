@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function SearchResultLists({ posts, loading, totalSearchResults }) {
   const navigate = useNavigate();
+  const noResultFound = totalSearchResults === 0;
 
   return (
     <>
@@ -20,6 +21,7 @@ export default function SearchResultLists({ posts, loading, totalSearchResults }
             </div>
           ) : (
             <>
+              {noResultFound && <span className="text-base font-medium">No Results Found!</span>}
               {posts.map((post) => {
                 const postSlug = createSlug(post.title);
                 const onClickPost = () => {

@@ -45,7 +45,7 @@ export default function SearchResultPage() {
   return (
     <div className="flex flex-col md:flex-row gap-2 ">
       <div className="md:w-3/4 md:h-screen md:scrollbar-thin scrollbar-thumb-light-navy scrollbar-track-blue-300 overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full pr-1">
-        <div>
+        <div className="mb-10">
           <SearchResultLists posts={posts} loading={loading} totalSearchResults={totalSearchResults} />
           <Pagination showIcons currentPage={currentPage} totalPages={totalPages} onPageChange={onNextPage} className="flex justify-end mb-4" />
         </div>
