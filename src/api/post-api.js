@@ -63,6 +63,38 @@ export const commentToPost = async (postId, text, token) => {
   }
 };
 
+export const editPostApi = async (postId, title, content, token) => {
+  try {
+    const response = await api.patch(
+      `/post/edit/${postId}`,
+      {
+        title,
+        content,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const deletePostApi = async (postId, token) => {
+  try {
+    const response = await api.delete(`/post/delete/${postId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export const deleteCommentApi = async (postId, commentId, token) => {
   try {
     const response = await api.delete(`/comment/${postId}`, {
