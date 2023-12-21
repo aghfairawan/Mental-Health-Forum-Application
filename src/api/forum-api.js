@@ -49,3 +49,21 @@ export const getPaginatedPostsOnSpecificForum = async (forumId, page) => {
     throw error;
   }
 };
+
+export const searchApi = async (q, page) => {
+  
+  try {
+    const response = await api.get("/forum/search", {
+      withCredentials: true,
+      params: {
+        q: q,
+        page: page,
+      },
+    });
+    return response.data;
+
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
