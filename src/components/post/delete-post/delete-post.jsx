@@ -13,22 +13,23 @@ export default function DeletePost({ postId }) {
   const navigate = useNavigate()
 
   const handleDelete = async () => {
-    setLoading(true);
-    try {
-      await deletePostApi(postId, accessToken);
-      message.config({
-        top: 120,
-      });
-      message.success("Post Delete Success!");
-      navigate('/')
-     
-    } catch (error) {
-      console.error("Failed to delete comment:", error);
-    } finally {
-      setLoading(false);
+    if (window.confirm("Are you sure you want to delete this post?")) {
+      setLoading(true);
+      try {
+        await deletePostApi(postId, accessToken);
+        message.config({
+          top: 120,
+        });
+        message.success("Post Delete Success!");
+        navigate('/');
+       
+      } catch (error) {
+        console.error("Failed to delete comment:", error);
+      } finally {
+        setLoading(false);
+      }
     }
   };
-
   return (
     <button type="submit" className="hover:text-red-700" onClick={handleDelete}>
       {loading ? <Spinner size="sm" /> : <Trash2 size={18} />}
