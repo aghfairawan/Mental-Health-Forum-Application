@@ -7,6 +7,7 @@ import RegisterPage from "./pages/register-page";
 import LoginPage from "./pages/login-page";
 import ForumDetailPage from "./pages/forum-detail-page";
 import PostPage from "./pages/post-page";
+import SearchResultPage from "./pages/search-page";
 
 function App() {
   const router = createBrowserRouter([
@@ -24,6 +25,10 @@ function App() {
         {
           path: "/forum/post/:postTitle/:postPage",
           element: <PostPage />,
+        },
+        {
+          path: "/search/:query/:searchPage",
+          element: <SearchResultPage />,
         },
         {
           path: "/register",

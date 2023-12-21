@@ -1,21 +1,20 @@
 import { useState } from "react";
-import { searchApi } from "../../../api/forum-api";
 import { Search } from "lucide-react";
 import { Spinner } from "flowbite-react";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchNavbar() {
-  const [query, setQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
   // console.log(searchResults)
 
   const handleSearch = async (e) => {
     e.preventDefault();
     setLoading(true);
-    if (!query) return;
+    if (!query.trim()) return;
     try {
-      const data = await searchApi(query, 1);
-      setSearchResults(data);
+      navigate(`/search/${query}/${1}`)
     } catch (error) {
       console.error("Error during search:", error);
     } finally {
@@ -25,7 +24,7 @@ export default function SearchNavbar() {
 
   return (
     <form onSubmit={handleSearch}>
-      <label htmlFor="newest-movies-search" className="mb-2 text-sm font-medium sr-only">
+      <label htmlFor="forum-search" className="mb-2 text-sm font-medium sr-only">
         Search
       </label>
       <div className="relative">
@@ -34,7 +33,7 @@ export default function SearchNavbar() {
         </div>
         <input
           type="search"
-          id="newest-movies-search"
+          id="forum-search"
           placeholder="Search forums"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
