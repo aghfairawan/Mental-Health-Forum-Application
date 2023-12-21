@@ -65,14 +65,30 @@ export const commentToPost = async (postId, text, token) => {
 
 export const deleteCommentApi = async (postId, commentId, token) => {
   try {
-    const response = await api.delete(
-      `/comment/${postId}`, 
+    const response = await api.delete(`/comment/${postId}`, {
+      data: { commentId: commentId },
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const editCommentApi = async (postId, commentId, text, token) => {
+  try {
+    const response = await api.patch(
+      `/comment/${postId}`,
       {
-        data: { commentId: commentId },
+        commentId,
+        text,
+      },
+      {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-
     return response.data;
   } catch (error) {
     console.error(error);

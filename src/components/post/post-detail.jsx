@@ -5,6 +5,7 @@ import { convertToInitial } from "../../utils/helper-converter";
 import LoadingForumContent from "../ui/loading";
 import { useAuth } from "../../context/use-context";
 import DeleteComment from "../comment/delete-comment";
+import EditComment from "../comment/edit-comment";
 
 export default function PostDetail({ post, loading, reFetching }) {
   const { userPayload } = useAuth();
@@ -54,7 +55,14 @@ export default function PostDetail({ post, loading, reFetching }) {
                     <p className="text-sm md:text-base mb-4">{comment.text} </p>
                   </div>
                   <div className="relative ">
-                    <div className="absolute  bottom-0 right-2">{isOwner && <DeleteComment commentId={comment._id} postId={post._id} onDeleted={reFetching} />}</div>
+                    <div className="absolute  bottom-0 right-2">
+                      {isOwner && (
+                        <div className="flex mb-1">
+                          <DeleteComment commentId={comment._id} postId={post._id} onDeleted={reFetching} />
+                          <EditComment currentComment={comment.text} commentId={comment._id} postId={post._id} onEdit={reFetching} />
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               );

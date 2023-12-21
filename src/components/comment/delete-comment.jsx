@@ -17,7 +17,7 @@ export default function DeleteComment({ postId, commentId, onDeleted }) {
       message.config({
         top: 120,
       });
-      message.success("Todo Delete Success!");
+      message.success("Comment Delete Success!");
 
       if (onDeleted) {
         onDeleted();
