@@ -7,6 +7,7 @@ import { useAuth } from "../../context/use-context";
 import DeleteComment from "../comment/delete-comment";
 import EditComment from "../comment/edit-comment";
 import EditPost from "./edit-post/edit-post";
+import DeletePost from "./delete-post/delete-post";
 
 export default function PostDetail({ post, loading, reFetching }) {
   const { userPayload } = useAuth();
@@ -33,6 +34,7 @@ export default function PostDetail({ post, loading, reFetching }) {
             {isPostOwner && (
               <div className="flex">
                 <EditPost postId={post._id} currentContent={post.content} currentTitle={post.title} onEdit={reFetching} />
+                <DeletePost postId={post._id} />
               </div>
             )}
           </div>
