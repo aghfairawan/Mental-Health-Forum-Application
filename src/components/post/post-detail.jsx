@@ -3,9 +3,14 @@ import { Clock } from "lucide-react";
 import { formatDateV2, timePassed } from "../../utils/date-converter";
 import { convertToInitial } from "../../utils/helper-converter";
 import LoadingForumContent from "../ui/loading";
+import { useAuth } from "../../context/use-context";
+import DeleteComment from "../comment/delete-comment";
 
-export default function PostDetail({ post, loading }) {
-  //   console.log(post.author.username);
+export default function PostDetail({ post, loading, reFetching }) {
+  const { userPayload } = useAuth();
+  const userId = userPayload?.userId;
+  // console.log(userId);
+  // console.log(post.author.username);
 
   return (
     <div className="">
@@ -34,20 +39,26 @@ export default function PostDetail({ post, loading }) {
             </div>
           </div>
           <div>
-            {post.comments.map((comment) => (
-              <div key={comment._id} className="flex md:flex-row md:gap-0 my-2 shadow bg-white border-gray-200 border-solid border-2 text-custom-gray">
-                <div className="flex flex-col justify-start md:justify-center  items-center p-1 md:p-4 border-gray-200 border-r-2">
-                  <div className="relative  md:text-4xl font-medium inline-flex items-center justify-center w-10 h-10 md:w-24 md:h-24 overflow-hidden bg-gray-300 rounded-full">{convertToInitial(comment.commenter.username)}</div>
-                  <div className="">
-                    <p className="text-sm md:text-base break-all">{comment.commenter.username}</p>
+            {post.comments.map((comment) => {
+              const isOwner = userId === comment.commenter._id;
+              return (
+                <div key={comment._id} className="flex md:flex-row md:gap-0 my-2 shadow bg-white border-gray-200 border-solid border-2 text-custom-gray">
+                  <div className="flex flex-col justify-start md:justify-center w-16 md:w-auto items-center p-1 md:p-4 border-gray-200 border-r-2">
+                    <div className="relative md:text-4xl font-medium inline-flex items-center justify-center w-10 h-10 md:w-24 md:h-24 overflow-hidden bg-gray-300 rounded-full">{convertToInitial(comment.commenter.username)}</div>
+                    <div className="">
+                      <p className="text-sm md:text-base break-all">{comment.commenter.username}</p>
+                    </div>
+                  </div>
+                  <div className="mt-2 px-2 md:px-1 flex md:divide-y flex-col w-11/12">
+                    <span className="mb-1 flex md:justify-end text-xs md:text-sm font-extralight">{timePassed(comment.createdAt)}</span>
+                    <p className="text-sm md:text-base mb-4">{comment.text} </p>
+                  </div>
+                  <div className="relative ">
+                    <div className="absolute  bottom-0 right-2">{isOwner && <DeleteComment commentId={comment._id} postId={post._id} onDeleted={reFetching} />}</div>
                   </div>
                 </div>
-                <div className="mt-2 px-2 md:px-1 flex md:divide-y flex-col w-11/12">
-                  <span className="mb-1 flex md:justify-end text-xs md:text-sm font-extralight">{timePassed(comment.createdAt)}</span>
-                  <p className="text-base mb-4">{comment.text}</p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </>
       )}

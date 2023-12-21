@@ -37,7 +37,7 @@ export const getPost = async (postId, page) => {
       params: {
         commentPage: page,
       },
-    } );
+    });
     return response.data;
   } catch (error) {
     console.error(error);
@@ -56,6 +56,23 @@ export const commentToPost = async (postId, text, token) => {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const deleteCommentApi = async (postId, commentId, token) => {
+  try {
+    const response = await api.delete(
+      `/comment/${postId}`, 
+      {
+        data: { commentId: commentId },
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+
     return response.data;
   } catch (error) {
     console.error(error);

@@ -47,13 +47,17 @@ export default function PostPage() {
     };
   }, [fetchPostDetail]);
 
+  const reFetching = () => {
+    fetchPostDetail();
+  };
+
   const onNextComment = (newPage) => {
     navigate(`/forum/post/${title}/${newPage}`, { state: { storedPostId } });
   };
 
   return (
     <div className="flex flex-col mb-10 md:mb-20">
-      <PostDetail post={post} loading={loading} />
+      <PostDetail post={post} loading={loading} reFetching={reFetching} />
       <Pagination showIcons currentPage={currentPage} totalPages={totalCommentPages} onPageChange={onNextComment} className="flex justify-end mb-4" />
       <Comment grabPostId={storedPostId} />
     </div>
