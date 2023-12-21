@@ -6,10 +6,13 @@ import LoadingForumContent from "../ui/loading";
 import { useAuth } from "../../context/use-context";
 import DeleteComment from "../comment/delete-comment";
 import EditComment from "../comment/edit-comment";
+import EditPost from "./edit-post/edit-post";
 
 export default function PostDetail({ post, loading, reFetching }) {
   const { userPayload } = useAuth();
   const userId = userPayload?.userId;
+  const isPostOwner = userId === post.author._id;
+  // console.log(isPostOwner)
   // console.log(userId);
   // console.log(post.author.username);
 
@@ -21,12 +24,17 @@ export default function PostDetail({ post, loading, reFetching }) {
         </div>
       ) : (
         <>
-          <div className=" bg-dark-navy py-3 pr-2 pl-4 shadow mt-5 mb-1 text-white rounded-t-lg flex justify-between">
+          <div className=" bg-dark-navy py-3 pr-2 gap-2 pl-4 shadow mt-5 mb-1 text-white rounded-t-lg flex justify-between">
             <h1 className="text-lg font-semibold">{post.title}</h1>
-            <span className="flex justify-end items-center text-xs md:text-sm font-normal gap-1">
+            <span className="flex justify-end flex-grow items-center text-xs md:text-sm font-normal gap-1">
               <Clock size={15} />
               {formatDateV2(post.createdAt)} by {post.author.username}
             </span>
+            {isPostOwner && (
+              <div className="flex">
+                <EditPost postId={post._id} currentContent={post.content} currentTitle={post.title} onEdit={reFetching} />
+              </div>
+            )}
           </div>
           <div className="flex md:flex-row md:gap-0 bg-gray-100 border-white border-solid border-2 shadow text-custom-gray">
             <div className="flex flex-col justify-start md:justify-center items-center p-1 md:p-4 border-white border-r-2">
