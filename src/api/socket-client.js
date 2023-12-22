@@ -1,6 +1,8 @@
 import io from "socket.io-client";
 
-export const socket = io("http://localhost:8080", {
+// baseURL: "https://us-central1-personal-d9ef9.cloudfunctions.net/health_haven_forum_server/api",
+
+export const socket = io("https://personal-d9ef9.el.r.appspot.com", {
   reconnection: true,
   reconnectionAttempts: 3,
   reconnectionDelay: 5 * 1000,
